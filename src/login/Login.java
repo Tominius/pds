@@ -32,7 +32,7 @@ public class Login {
         } else {
             System.out.println("Usuario no encontrado.");
         }
-        scanner.close();
+       // scanner.close();
         return instancia;
     }
 

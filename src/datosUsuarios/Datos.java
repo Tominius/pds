@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class Datos {
 
-    String ruta = "src/datos/datos.csv";
+    String ruta = "src/datosUsuarios/datos.csv";
 
     public String obtenerTipoUsuario(String username) {
         try {
@@ -135,6 +135,7 @@ public class Datos {
     }
 
     public java.util.List<String> leerDatos(String username) {
+        // Devuelve los datos de un usuario en una lista
         java.util.List<String> datos = new java.util.ArrayList<>();
         try {
             java.nio.file.Path path = java.nio.file.Paths.get(ruta);
@@ -204,6 +205,37 @@ public class Datos {
             e.printStackTrace();
         }
         return datosVendedor;
+    }
+
+    public void imprimirTodosLosClientes() {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(ruta);
+            if (!java.nio.file.Files.exists(path)) {
+                System.out.println("No hay clientes registrados.");
+                return;
+            }
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
+            java.util.List<java.util.List<String>> clientes = new java.util.ArrayList<>();
+            for (String line : lines) {
+                String[] partes = line.split(",");
+                if (partes.length >= 6 && "cliente".equals(partes[2])) {
+                    java.util.List<String> datosCliente = new java.util.ArrayList<>();
+                    for (String parte : partes) {
+                        datosCliente.add(parte);
+                    }
+                    clientes.add(datosCliente);
+                }
+            }
+            if (clientes.isEmpty()) {
+                System.out.println("No hay clientes registrados.");
+            } else {
+                for (java.util.List<String> cliente : clientes) {
+                    System.out.println("Nombre: "+ cliente.get(0) + " | DNI: " + cliente.get(3) + " | Telefono: " + cliente.get(4) + " | Email: " + cliente.get(5));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

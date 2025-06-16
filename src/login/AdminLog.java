@@ -1,40 +1,53 @@
 package login;
 
+import datosUsuarios.Datos;
+import vehiculos.DatosVehiculos;
+
 public class AdminLog extends AbstractUserLog implements AdminLogI {
 
     public AdminLog(String usuario, String contrasena) {
         super(usuario, contrasena);
     }
 
+    Datos datos = new Datos();
+    DatosVehiculos datosVehiculos = new DatosVehiculos();
+
 
     @Override
     public void verClientes() {
         // Implementación del método para ver clientes
+
+        datos.imprimirTodosLosClientes();
     }
 
     @Override
-    public void agregarCliente(String username, String contraseña, String dni, String telefono, String email) {
+    public void agregarCliente(String username, String contraseña, String dni, String telefono, String email) {//
         // Implementación del método para agregar un cliente
+        datos.insertarCliente(username, contraseña, dni, telefono, email);
     }
 
     @Override
-    public void eliminarCliente(String username) {
+    public void eliminarCliente(String username) {//
         // Implementación del método para eliminar un cliente
+        datos.eliminarUser(username);
     }
 
     @Override
-    public void cargarVehiculo() {
+    public void cargarVehiculo(String tipo, String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id) {
         // Implementación del método para cargar un vehículo
+        datosVehiculos.insertarVehiculo(tipo, marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico,id);
     }
 
     @Override
-    public void eliminarVehiculo() {
+    public void eliminarVehiculo(String id) {
         // Implementación del método para eliminar un vehículo
+        datosVehiculos.eliminarVehiculo(id);
     }
 
     @Override
-    public void verVehiculos() {
+    public void verVehiculos() {//
         // Implementación del método para ver vehículos
+        datosVehiculos.verVehiculos();
     }
 
     @Override

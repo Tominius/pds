@@ -2,7 +2,7 @@ package vehiculos;
 
 public class Moto extends AbstractVehiculo {
 
-    int cilindrada;
+    boolean esDeportiva;
 
     @Override
     public double impuestoNacionalAbstracto() {
