@@ -3,6 +3,7 @@ package datosUsuarios;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 
 public class Datos {
 
@@ -72,7 +73,7 @@ public class Datos {
             System.out.println("El usuario ya existe.");
             return;
         }
-        String csvLine = username + "," + contraseña + ",cliente," + dni + "," + telefono + "," + email;
+        String csvLine = username + "," + contraseña + ",cliente," + dni + "," + telefono + "," + email + "," + java.util.UUID.randomUUID().toString();
         try {
             FileWriter fileWriter = new FileWriter(ruta, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -106,7 +107,7 @@ public class Datos {
             System.out.println("El usuario ya existe.");
             return;
         }
-        String csvLine = username + "," + contraseña + ",vendedor,," + email;
+        String csvLine = username + "," + contraseña + ",vendedor,," + email + "," + java.util.UUID.randomUUID().toString();
         try {
             FileWriter fileWriter = new FileWriter(ruta, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -215,17 +216,7 @@ public class Datos {
                 return;
             }
             java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
-            java.util.List<java.util.List<String>> clientes = new java.util.ArrayList<>();
-            for (String line : lines) {
-                String[] partes = line.split(",");
-                if (partes.length >= 7 && "cliente".equals(partes[2])) {
-                    java.util.List<String> datosCliente = new java.util.ArrayList<>();
-                    for (String parte : partes) {
-                        datosCliente.add(parte);
-                    }
-                    clientes.add(datosCliente);
-                }
-            }
+            List<List<String>> clientes = getLists(lines);
             if (clientes.isEmpty()) {
                 System.out.println("No hay clientes registrados.");
             } else {
@@ -236,6 +227,52 @@ public class Datos {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void imprimirTodosLosVendedores() {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(ruta);
+            if (!java.nio.file.Files.exists(path)) {
+                System.out.println("No hay vendedores registrados.");
+                return;
+            }
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
+            List<List<String>> vendedores = new java.util.ArrayList<>();
+            for (String line : lines) {
+                String[] partes = line.split(",");
+                if (partes.length >= 6 && "vendedor".equals(partes[2])) {
+                    List<String> datosVendedor = new java.util.ArrayList<>();
+                    for (String parte : partes) {
+                        datosVendedor.add(parte);
+                    }
+                    vendedores.add(datosVendedor);
+                }
+            }
+            if (vendedores.isEmpty()) {
+                System.out.println("No hay vendedores registrados.");
+            } else {
+                for (java.util.List<String> vendedor : vendedores) {
+                    System.out.println("Nombre: " + vendedor.get(0) + " | Email: " + vendedor.get(4) + " | ID: " + vendedor.get(5));
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private static List<List<String>> getLists(List<String> lines) {
+        List<List<String>> clientes = new java.util.ArrayList<>();
+        for (String line : lines) {
+            String[] partes = line.split(",");
+            if (partes.length >= 7 && "cliente".equals(partes[2])) {
+                List<String> datosCliente = new java.util.ArrayList<>();
+                for (String parte : partes) {
+                    datosCliente.add(parte);
+                }
+                clientes.add(datosCliente);
+            }
+        }
+        return clientes;
     }
 
 }

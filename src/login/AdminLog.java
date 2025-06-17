@@ -58,14 +58,14 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
 
     @Override
     public void generarReporte() {
-        // Implementación del método para generar un reporte
+
     }
 
     @Override
-    public void agregarPedido(String idVehiculo,int idPedido,String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago) {
+    public void agregarPedido(String idVehiculo,int idPedido,String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago, String idVendedor) {
             datosPedidos.cargarDatosPedidos(idPedido, fecha,nombreConcesionario, cuitConcesionario);
             datosFacturacion.cargarDatosFacturacion(costoTotal, formaPago, idCliente, direccion, cuilCuit);
-            datosGeneral.cargarDatosGeneral(String.valueOf(idPedido), idVehiculo, idCliente); // Aquí deberías pasar el ID del vehículo correspondiente
+            datosGeneral.cargarDatosGeneral(String.valueOf(idPedido), idVehiculo, idCliente,idVendedor); // Aquí deberías pasar el ID del vehículo correspondiente
     }
 
     @Override
