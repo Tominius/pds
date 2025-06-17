@@ -116,7 +116,7 @@ public class App {
                     String cuitConcesionario = scannerApp.nextLine();
                     System.out.print("Fecha: ");
                     String fecha = scannerApp.nextLine();
-                    System.out.print("A contunuacion ingrese los datos de facturacion");
+                    System.out.println("A contunuacion ingrese los datos de facturacion");
                     ((AdminLog) instancia).verClientes();
                     System.out.print("ID Cliente: ");
                     String idCliente = scannerApp.nextLine();
@@ -128,8 +128,11 @@ public class App {
                     String costoTotal = scannerApp.nextLine();
                     System.out.print("Forma de Pago(Transferencia/Contado/Tarjeta): ");
                     String formaPago = scannerApp.nextLine();
-
-                    ((AdminLog) instancia).agregarPedido(idPedido, nombreConcesionario, cuitConcesionario, fecha, idCliente, direccion, cuilCuit, costoTotal, formaPago);
+                    System.out.println("Seleccione un vehiculo: ");
+                    ((AdminLog) instancia).verVehiculos();
+                    String idVehiculo = String.valueOf(scannerApp.nextInt());
+                    System.out.print("ID del vehículo: ");
+                    ((AdminLog) instancia).agregarPedido(idVehiculo,idPedido, nombreConcesionario, cuitConcesionario, fecha, idCliente, direccion, cuilCuit, costoTotal, formaPago);
                 } else if (opcion == 9) {
                     System.out.print("Ingrese el ID del pedido a ver: ");
                     int id = scannerApp.nextInt();

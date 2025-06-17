@@ -9,7 +9,7 @@ public interface AdminLogI {
     void eliminarVehiculo(String id);
     void verVehiculos();
     void generarReporte();
-    void agregarPedido(int idPedido, String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago);
+    void agregarPedido(String idVehiculo,int idPedido, String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago);
     void verPedido(int id);
     
 }

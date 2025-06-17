@@ -1,21 +1,19 @@
 package pedidos.datosPedidos;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class DatosPedido {
 
-    String ruta = "src/pedidos/datosPedidos/datosPedidos.csv";
+    String ruta = "src/pedidos/datosPedidos/datosPedido.csv";
 
 
-    public void cargarDatosPedidos(String idPedido ,String fecha, String nombreConsecionaria, String cuitConsecionaria) {
+    public void cargarDatosPedidos(int pedido, String fecha, String nombreConsecionaria, String cuitConsecionaria) {
 
         try (FileWriter fw = new FileWriter(ruta, true)) {
-            fw.write(idPedido + "," + fecha + "," + nombreConsecionaria + "," + cuitConsecionaria + "Administracion" +"\n");
+            fw.write(pedido + "," + fecha + "," + nombreConsecionaria + "," + cuitConsecionaria + ","+"Administracion" +"\n");
 
-            insertarEnHistorial(idPedido, "Administracion");
+            insertarEnHistorial(String.valueOf(pedido), "Administracion");
         } catch (IOException e) {
             e.printStackTrace();
         }

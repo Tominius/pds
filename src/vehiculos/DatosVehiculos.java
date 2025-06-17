@@ -19,7 +19,8 @@ public class DatosVehiculos {
                 String[] partes = line.split(",");
                 if (partes.length >= 10) {
                     System.out.println("------------------------------Vehiculo------------------------------");
-                    String output = "Tipo: " + partes[0] + "\n" +
+                    String output = "Id: " + partes[10] + "\n" +
+                            "Tipo: " + partes[0] + "\n" +
                         "Marca: " + partes[1] + "\n" +
                         "Modelo: " + partes[2] + "\n" +
                         "Color: " + partes[3] + "\n" +

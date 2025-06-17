@@ -1,6 +1,9 @@
 package login;
 
 import datosUsuarios.Datos;
+import pedidos.DatosGeneral;
+import pedidos.datosFacturacion.DatosFacturacion;
+import pedidos.datosPedidos.DatosPedido;
 import vehiculos.DatosVehiculos;
 
 public class AdminLog extends AbstractUserLog implements AdminLogI {
@@ -11,6 +14,9 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
 
     Datos datos = new Datos();
     DatosVehiculos datosVehiculos = new DatosVehiculos();
+    DatosFacturacion datosFacturacion = new DatosFacturacion();
+    DatosGeneral datosGeneral = new DatosGeneral();
+    DatosPedido datosPedidos = new DatosPedido();
 
 
     @Override
@@ -56,13 +62,10 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void agregarPedido(int idPedido, String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago) {
-        // Implementación del método para agregar un pedido
-        // Aquí deberías llamar a la clase/método encargado de guardar el pedido, por ejemplo:
-        
-
-        // Ejemplo de llamada (ajusta según tu implementación real):
-        // datosPedidos.insertarPedido(idPedido, nombreConcesionario, cuitConcesionario, fecha, idCliente, direccion, cuilCuit, costoTotal, formaPago);
+    public void agregarPedido(String idVehiculo,int idPedido,String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago) {
+            datosPedidos.cargarDatosPedidos(idPedido, fecha,nombreConcesionario, cuitConcesionario);
+            datosFacturacion.cargarDatosFacturacion(costoTotal, formaPago, idCliente, direccion, cuilCuit);
+            datosGeneral.cargarDatosGeneral(String.valueOf(idPedido), idVehiculo, idCliente); // Aquí deberías pasar el ID del vehículo correspondiente
     }
 
     @Override
