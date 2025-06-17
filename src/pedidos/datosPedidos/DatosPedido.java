@@ -1,17 +1,37 @@
 package pedidos.datosPedidos;
 
-public class DatosPedido {
-    private String fecha;
-    private int idPedido;
-    private Concesionario concesionario;
-    private EstadoPedido estadoPedido;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
-    public DatosPedido(String fecha, int idPedido, Concesionario concesionario, EstadoPedido estadoPedido) {
-        this.fecha = fecha;
-        this.idPedido = idPedido;
-        this.concesionario = concesionario;
-        this.estadoPedido = estadoPedido;
+public class DatosPedido {
+
+    String ruta = "src/pedidos/datosPedidos/datosPedidos.csv";
+
+
+    public void cargarDatosPedidos(String idPedido ,String fecha, String nombreConsecionaria, String cuitConsecionaria) {
+
+        try (FileWriter fw = new FileWriter(ruta, true)) {
+            fw.write(idPedido + "," + fecha + "," + nombreConsecionaria + "," + cuitConsecionaria + "Administracion" +"\n");
+
+            insertarEnHistorial(idPedido, "Administracion");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
+    private void insertarEnHistorial(String id, String area) {
+        String rutaHistorial = "src/pedidos/datosPedidos/historiale.csv";
+        try (FileWriter fw = new FileWriter(rutaHistorial, true)) {
+            fw.write(id + "," + area + "\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }

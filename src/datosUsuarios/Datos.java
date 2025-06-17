@@ -218,7 +218,7 @@ public class Datos {
             java.util.List<java.util.List<String>> clientes = new java.util.ArrayList<>();
             for (String line : lines) {
                 String[] partes = line.split(",");
-                if (partes.length >= 6 && "cliente".equals(partes[2])) {
+                if (partes.length >= 7 && "cliente".equals(partes[2])) {
                     java.util.List<String> datosCliente = new java.util.ArrayList<>();
                     for (String parte : partes) {
                         datosCliente.add(parte);
@@ -230,7 +230,7 @@ public class Datos {
                 System.out.println("No hay clientes registrados.");
             } else {
                 for (java.util.List<String> cliente : clientes) {
-                    System.out.println("Nombre: "+ cliente.get(0) + " | DNI: " + cliente.get(3) + " | Telefono: " + cliente.get(4) + " | Email: " + cliente.get(5));
+                    System.out.println("Nombre: "+ cliente.get(0) + " | DNI: " + cliente.get(3) + " | Telefono: " + cliente.get(4) + " | Email: " + cliente.get(5) + " | ID: " + cliente.get(6));
                 }
             }
         } catch (IOException e) {

@@ -27,24 +27,5 @@ public class PedidoDeCompra {
 
      // Estructura: ID Pedido, Nombre, Apellido, CUIT, Dirección, Email, Teléfono
 
-    public void exportarACSV() {
-        String nombreArchivo = "pedido_" + idPedido + ".csv";
-
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(nombreArchivo))) {
-            // Encabezado
-            bw.write("ID Pedido, datosPedido, Cliente");
-            bw.newLine();
-
-            // Cuerpo
-            bw.write(
-                    idPedido + "," + datosPedido + "," + datosFacturacion.getCliente().getDni()
-            );
-            bw.newLine();   // por si luego añadís más registros
-        } catch (IOException e) {
-            e.printStackTrace();           // en un proyecto real, usar un logger
-        }
-    }
-
-
 
 }

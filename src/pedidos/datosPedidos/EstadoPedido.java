@@ -2,15 +2,8 @@ package pedidos.datosPedidos;
 
 public class EstadoPedido {
 
-    private String idEstado;
+    private String idPedido;
     private String area;
-    private Historial historial;
-
-    public EstadoPedido(String idEstado, String area, Historial historial) {
-        this.idEstado = idEstado;
-        this.area = area;
-        this.historial = historial;
-    }
 
     private void notificacion(){
         System.out.println("El area a pasado a" + area);

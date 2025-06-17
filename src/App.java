@@ -7,6 +7,8 @@ import login.Login;
 public class App {
     public static void main(String[] args) throws Exception {
 
+        
+
         System.out.println("Bienvenido al sistema de gestión de Consesionaria");
         System.out.println("Por favor, inicie sesión.");
 
@@ -103,7 +105,31 @@ public class App {
                 } else if (opcion == 7) {
                     ((AdminLog) instancia).generarReporte();
                 } else if (opcion == 8) {
-                    ((AdminLog) instancia).agregarPedido();
+
+                    System.out.println("Ingrese los datos del nuevo pedido:");
+                    System.out.print("ID del pedido: ");
+                    int idPedido = scannerApp.nextInt();
+                    scannerApp.nextLine(); // Limpiar el buffer antes de leer la línea completa
+                    System.out.print("Nombre del concesionario: ");
+                    String nombreConcesionario = scannerApp.nextLine();
+                    System.out.print("CUIT del consecionario: ");
+                    String cuitConcesionario = scannerApp.nextLine();
+                    System.out.print("Fecha: ");
+                    String fecha = scannerApp.nextLine();
+                    System.out.print("A contunuacion ingrese los datos de facturacion");
+                    ((AdminLog) instancia).verClientes();
+                    System.out.print("ID Cliente: ");
+                    String idCliente = scannerApp.nextLine();
+                    System.out.print("Dirección: ");
+                    String direccion = scannerApp.nextLine();
+                    System.out.print("Cuil-Cuit: ");
+                    String cuilCuit = scannerApp.nextLine();
+                    System.out.print("Costo Total: ");
+                    String costoTotal = scannerApp.nextLine();
+                    System.out.print("Forma de Pago(Transferencia/Contado/Tarjeta): ");
+                    String formaPago = scannerApp.nextLine();
+
+                    ((AdminLog) instancia).agregarPedido(idPedido, nombreConcesionario, cuitConcesionario, fecha, idCliente, direccion, cuilCuit, costoTotal, formaPago);
                 } else if (opcion == 9) {
                     System.out.print("Ingrese el ID del pedido a ver: ");
                     int id = scannerApp.nextInt();
@@ -112,7 +138,6 @@ public class App {
                     System.out.println("Opción no válida. Por favor, intente de nuevo.");
                 }
             }
-
             scannerApp.close();
         }   
     } 

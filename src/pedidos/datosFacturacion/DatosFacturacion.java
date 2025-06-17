@@ -2,48 +2,22 @@ package pedidos.datosFacturacion;
 
 import login.ClienteLog;
 
+import java.io.FileWriter;
+import java.io.IOException;
+
 public class DatosFacturacion {
-    private Facturacion facturacion;
-    private float costoTotal;
-    private FormaDePago formaDePago;
-    private ClienteLog cliente;
 
-    public DatosFacturacion(Facturacion facturacion, float costoTotal, FormaDePago formaDePago, ClienteLog cliente) {
-        this.facturacion = facturacion;
-        this.costoTotal = costoTotal;
-        this.formaDePago = formaDePago;
-        this.cliente = cliente;
+    String ruta = "src/pedidos/datosFacturacion/datosFacturacion.csv";
+
+    public void cargarDatosFacturacion(String costoTotal, String formaDePago, String idCliente, String direccion, String cuilcuit) {
+
+        try (FileWriter fw = new FileWriter(ruta, true)) {
+            fw.write(costoTotal + "," + formaDePago + "," + idCliente + "," + direccion + "," + cuilcuit +"\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
     }
 
-    public Facturacion getFacturacion() {
-        return facturacion;
-    }
-
-    public void setFacturacion(Facturacion facturacion) {
-        this.facturacion = facturacion;
-    }
-
-    public float getCostoTotal() {
-        return costoTotal;
-    }
-
-    public void setCostoTotal(float costoTotal) {
-        this.costoTotal = costoTotal;
-    }
-
-    public FormaDePago getFormaDePago() {
-        return formaDePago;
-    }
-
-    public void setFormaDePago(FormaDePago formaDePago) {
-        this.formaDePago = formaDePago;
-    }
-
-    public ClienteLog getCliente() {
-        return cliente;
-    }
-
-    public void setCliente(ClienteLog cliente) {
-        this.cliente = cliente;
-    }
 }

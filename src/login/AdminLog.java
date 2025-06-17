@@ -56,8 +56,13 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void agregarPedido() {
+    public void agregarPedido(int idPedido, String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago) {
         // Implementación del método para agregar un pedido
+        // Aquí deberías llamar a la clase/método encargado de guardar el pedido, por ejemplo:
+        
+
+        // Ejemplo de llamada (ajusta según tu implementación real):
+        // datosPedidos.insertarPedido(idPedido, nombreConcesionario, cuitConcesionario, fecha, idCliente, direccion, cuilCuit, costoTotal, formaPago);
     }
 
     @Override
