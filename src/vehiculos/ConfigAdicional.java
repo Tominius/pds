@@ -1,31 +1,15 @@
 package vehiculos;
 
 public class ConfigAdicional {
-    String extra;
-    String garantia;
-    String accesorios;
 
-    public String getExtra() {
-        return extra;
-    }
+    boolean existencia;
 
-    public void setExtra(String extra) {
-        this.extra = extra;
-    }
 
-    public String getGarantia() {
-        return garantia;
-    }
-
-    public void setGarantia(String garantia) {
-        this.garantia = garantia;
-    }
-
-    public String getAccesorios() {
-        return accesorios;
-    }
-
-    public void setAccesorios(String accesorios) {
-        this.accesorios = accesorios;
+    public ConfigAdicional(String equipAdicional) {
+        if (equipAdicional.equalsIgnoreCase("Ninguno")) {
+            this.existencia = false; // No hay equipamiento adicional
+        } else {
+            this.existencia = true; // Hay equipamiento adicional
+        }
     }
 }

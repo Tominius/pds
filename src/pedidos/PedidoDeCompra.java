@@ -9,6 +9,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class PedidoDeCompra {
+
     private int idPedido;
     private DatosPedido datosPedido;
     private DatosFacturacion datosFacturacion;

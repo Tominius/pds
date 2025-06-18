@@ -17,8 +17,6 @@ public class DatosPedido {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
 
     private void insertarEnHistorial(String id, String area) {

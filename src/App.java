@@ -4,11 +4,29 @@ import login.AbstractUserLog;
 import login.AdminLog;
 import login.Login;
 import menus.menuAdmin;
+import vehiculos.AbstractVehiculo;
 
 public class App {
     public static void main(String[] args) throws Exception {
 
-        
+        // Lista Usuarios
+        UsersFactory usersF = new UsersFactory();
+        String rutaCSVUsuarios = "src/datosUsuarios/datos.csv";
+        AbstractUserLog[] usuarios =  usersF.cargarUsuariosDesdeCSV(rutaCSVUsuarios).toArray(new AbstractUserLog[0]);
+
+        // Lista Vehículos
+
+        VehiculoFactory vehiculoFactory = new VehiculoFactory();
+        String rutaCSV = "src/vehiculos/vehiculos.csv";
+        AbstractVehiculo[] vehiculos = vehiculoFactory.cargarVehiculosDesdeCSV(rutaCSV).toArray(new AbstractVehiculo[0]);
+
+        // Lista Pedidos
+
+
+
+
+
+
 
         System.out.println("Bienvenido al sistema de gestión de Consesionaria");
         System.out.println("Por favor, inicie sesión.");

@@ -4,7 +4,7 @@ public class VendedorLog extends AbstractUserLog implements VendedorLogI {
 
     private String email;
 
-    VendedorLog(String usuario, String contrasena, String email) {
+    public VendedorLog(String usuario, String contrasena, String email) {
         super(usuario, contrasena);
         this.email = email;
     }

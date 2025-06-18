@@ -42,7 +42,7 @@ public abstract class BuilderVehiculo {
         }
 
         // Suponiendo que ConfigAdicional tiene un constructor por defecto
-        this.equip_adicional = new ConfigAdicional();
+        //this.equip_adicional = new ConfigAdicional();
     }
 
     public abstract void datosExtra();

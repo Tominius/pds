@@ -3,9 +3,9 @@ package pedidos.datosPedidos;
 public class Concesionario {
 
     private String nombre;
-    private int cuit;
+    private String cuit;
 
-    public Concesionario(String nombre, int cuit) {
+    public Concesionario(String nombre, String cuit) {
         this.nombre = nombre;
         this.cuit = cuit;
     }
@@ -18,11 +18,5 @@ public class Concesionario {
         this.nombre = nombre;
     }
 
-    public int getCuit() {
-        return cuit;
-    }
 
-    public void setCuit(int cuit) {
-        this.cuit = cuit;
-    }
 }

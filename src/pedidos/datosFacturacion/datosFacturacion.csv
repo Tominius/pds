@@ -1,6 +1,2 @@
-costoTotal,formaDePago,idCliente,direccion,cuil-cuit
+idPedido,costoTotal,formaDePago,idCliente,direccion,cuil-cuit
 
-21333333,Contado,5,olavarria,1222222222222
-312323,Tarjeta,5,dasdasd,asdasdas
-20000,Contado,f06446cf-e823-43f9-82ad-cf31f8db2b9d,necochea,2131321
-2300000,Tarjeta,f06446cf-e823-43f9-82ad-cf31f8db2b9d,Necochea,2221111223

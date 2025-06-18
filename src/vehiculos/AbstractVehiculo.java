@@ -11,6 +11,22 @@ public abstract class AbstractVehiculo {
         protected String caracteristicas;
         protected boolean disponible;
 
+        public AbstractVehiculo(String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id) {
+            this.marca = marca;
+            this.modelo = modelo;
+            this.color = color;
+            if ((equipAdicional.equals("Ninguno"))) {
+                this.equip_adicional = new ConfigAdicional("Ninguno");
+            } else {
+                this.equip_adicional = new ConfigAdicional(equipAdicional);
+            }
+            this.numero_de_chasis = Integer.parseInt(chasis);
+            this.num_de_motor = Integer.parseInt(motor);
+            this.caracteristicas = caracteristicas;
+            this.disponible = disponible.equalsIgnoreCase("Sí");
+
+        }
+
         public abstract double impuestoNacionalAbstracto();
         public abstract double impuestoProvinvialAddAbstracto();
 
