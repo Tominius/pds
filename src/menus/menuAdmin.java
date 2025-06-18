@@ -135,7 +135,7 @@ public class menuAdmin {
                     datosVendedor.imprimirTodosLosVendedores();
                     System.out.println("Seleccione un vendedor (ID): ");
                     String idVendedor = scannerApp.next();
-                    ((AdminLog) instancia).agregarPedido(idVehiculo, idPedido, nombreConcesionario, cuitConcesionario, fecha, idCliente, direccion, cuilCuit, costoTotal, formaPago, idVendedor);
+                    ((AdminLog) instancia).agregarPedido(idVehiculo, String.valueOf(idPedido), nombreConcesionario, cuitConcesionario, fecha, idCliente, direccion, cuilCuit, costoTotal, formaPago, idVendedor);
                 } else if (opcion == 9) {
                     System.out.print("Ingrese el ID del pedido a ver: ");
                     int id = scannerApp.nextInt();

@@ -1,10 +1,12 @@
-import java.util.Scanner;
-
 import login.AbstractUserLog;
 import login.AdminLog;
 import login.Login;
+import login.UsersFactory;
 import menus.menuAdmin;
+import pedidos.PedidoDeCompra;
+import pedidos.PedidoFactory;
 import vehiculos.AbstractVehiculo;
+import vehiculos.VehiculoFactory;
 
 public class App {
     public static void main(String[] args) throws Exception {
@@ -22,7 +24,9 @@ public class App {
 
         // Lista Pedidos
 
-
+        PedidoFactory pedidoFactory = new PedidoFactory();
+        String rutaCSVPedidos = "src/pedidos/pedidos.csv";
+        PedidoDeCompra[] pedidos = pedidoFactory.cargarPedidosDesdeCSV(rutaCSVPedidos).toArray(new PedidoDeCompra[0]);
 
 
 

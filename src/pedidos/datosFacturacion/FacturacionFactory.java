@@ -19,11 +19,11 @@ public class FacturacionFactory {
 
         // Buscar la fila de facturación correspondiente al idPedido
         String[] datos = datosFacturacion.stream()
-                .filter(arr -> arr[0].equals(idPedido))
+                .filter(arr -> arr[5].equals(idPedido))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Pedido no encontrado: " + idPedido));
 
-        String idCliente = datos[3];
+        String idCliente = datos[2];
 
         // Buscar datos del cliente por id y tipo "cliente"
         String[] datosCliente = datosClientes.stream()
@@ -40,11 +40,11 @@ public class FacturacionFactory {
         );
 
         FormaDePago formaDePago;
-        if (datos[2].equals("Contado")) {
+        if (datos[1].equals("Contado")) {
             formaDePago = new Contado(2, "Contado");
-        } else if (datos[2].equals("Tarjeta")) {
-            formaDePago = new Contado(2, "Contado");
-        } else if (datos[2].equals("Transferencia")) {
+        } else if (datos[1].equals("Tarjeta")) {
+            formaDePago = new Contado(2, "Tarjeta");
+        } else if (datos[1].equals("Transferencia")) {
             formaDePago = new Transferencia(2, "Transferencia");
         } else {
             throw new RuntimeException("Forma de pago no reconocida: " + datos[2]);
@@ -55,7 +55,7 @@ public class FacturacionFactory {
                 datos[1], // costoTotal
                 datos[2], // formaDePago
                 formaDePago,
-                datos[4], // direccion
+                datos[3], // direccion
                 cliente
         );
     }

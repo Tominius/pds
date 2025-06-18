@@ -62,9 +62,9 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void agregarPedido(String idVehiculo,int idPedido,String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago, String idVendedor) {
-            datosPedidos.cargarDatosPedidos(idPedido, fecha,nombreConcesionario, cuitConcesionario);
-            datosFacturacion.cargarDatosFacturacion(costoTotal, formaPago, idCliente, direccion, cuilCuit);
+    public void agregarPedido(String idVehiculo,String idPedido,String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago, String idVendedor) {
+            datosPedidos.cargarDatosPedidos(Integer.parseInt(idPedido), fecha,nombreConcesionario, cuitConcesionario);
+            datosFacturacion.cargarDatosFacturacion(idPedido,costoTotal, formaPago, idCliente, direccion, cuilCuit);
             datosGeneral.cargarDatosGeneral(String.valueOf(idPedido), idVehiculo, idCliente,idVendedor); // Aquí deberías pasar el ID del vehículo correspondiente
     }
 

@@ -240,7 +240,7 @@ public class Datos {
             List<List<String>> vendedores = new java.util.ArrayList<>();
             for (String line : lines) {
                 String[] partes = line.split(",");
-                if (partes.length >= 6 && "vendedor".equals(partes[2])) {
+                if (partes.length >= 4 && "vendedor".equals(partes[2])) {
                     List<String> datosVendedor = new java.util.ArrayList<>();
                     for (String parte : partes) {
                         datosVendedor.add(parte);
@@ -252,14 +252,13 @@ public class Datos {
                 System.out.println("No hay vendedores registrados.");
             } else {
                 for (java.util.List<String> vendedor : vendedores) {
-                    System.out.println("Nombre: " + vendedor.get(0) + " | Email: " + vendedor.get(4) + " | ID: " + vendedor.get(5));
+                    System.out.println("Nombre: " + vendedor.get(0) + " | Email: " + vendedor.get(3) + " | ID: " + vendedor.get(4));
                 }
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
-
     private static List<List<String>> getLists(List<String> lines) {
         List<List<String>> clientes = new java.util.ArrayList<>();
         for (String line : lines) {
