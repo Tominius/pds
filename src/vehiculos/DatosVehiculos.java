@@ -48,7 +48,7 @@ public class DatosVehiculos {
         }
     }*/
 
-    public void insertarVehiculo(String tipo, String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id) {
+    public void insertarVehiculo(String tipo, String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id, String precioVehiculo, String aplicaImpuestoNacional, String aplicaImpuestoProvincial) {
         try {
             java.nio.file.Path path = java.nio.file.Paths.get(ruta);
             if (java.nio.file.Files.exists(path)) {
@@ -61,7 +61,7 @@ public class DatosVehiculos {
                     }
                 }
             }
-            String csvLine = tipo + "," + marca + "," + modelo + "," + color + "," + equipAdicional + "," + chasis + "," + motor + "," + caracteristicas + "," + disponible + "," + atributoEspecifico + "," + id;
+            String csvLine = tipo + "," + marca + "," + modelo + "," + color + "," + equipAdicional + "," + chasis + "," + motor + "," + caracteristicas + "," + disponible + "," + atributoEspecifico + "," + id+ "," + precioVehiculo + "," + aplicaImpuestoNacional + "," + aplicaImpuestoProvincial;
             FileWriter fileWriter = new FileWriter(ruta, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
             bufferedWriter.write(csvLine);

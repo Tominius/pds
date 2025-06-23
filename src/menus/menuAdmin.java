@@ -10,9 +10,20 @@ import pedidos.PedidoFactory;
 import vehiculos.AbstractVehiculo;
 import vehiculos.VehiculoFactory;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class menuAdmin {
+
+    public static AbstractVehiculo buscarVehiculoPorID(String id, List<AbstractVehiculo> lista) {
+        for (AbstractVehiculo v : lista) {
+            if (v.getID().equals(id)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
 
     // Lista Usuarios
     UsersFactory usersF = new UsersFactory();
@@ -186,14 +197,47 @@ public class menuAdmin {
                         }
                     }
 
+                    System.out.print("Precio del vehículo: ");
+                    double precioVehiculo = scannerApp.nextDouble();
+
+                    System.out.print("¿Aplica impuesto Nacional? (Si/No): ");
+                    String aplicaImpuestoNacional = "";
+                    while (true) {
+                        aplicaImpuestoNacional = scannerApp.next();
+                        if (esSiONo(aplicaImpuestoNacional)) break;
+                        System.out.print("Respuesta no válida. Ingrese Si o No: ");
+                    }
+
+                    System.out.print("¿Aplica impuesto Provincial? (Si/No): ");
+                    String aplicaImpuestoProvincial = "";
+                    while (true) {
+                        aplicaImpuestoProvincial = scannerApp.next();
+                        if (esSiONo(aplicaImpuestoProvincial)) break;
+                        System.out.print("Respuesta no válida. Ingrese Si o No: ");
+                    }
+
                     System.out.print("ID del vehículo: ");
                     String ID = scannerApp.next();
 
                     System.out.println(VERDE + "\n✓ Vehículo cargado correctamente." + RESET);
 
-                    ((AdminLog) instancia).cargarVehiculo(tipo, marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, ID);
+                    ((AdminLog) instancia).cargarVehiculo(tipo, marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, ID, precioVehiculo, aplicaImpuestoNacional, aplicaImpuestoProvincial);
                     // Agregar el vehículo a la lista local
-                    AbstractVehiculo nuevoVehiculo = vehiculoFactory.crearVehiculo(tipo, marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, ID);
+                    boolean in;
+                    if (aplicaImpuestoNacional.equalsIgnoreCase("Si")) {
+                        in = true;
+                    } else {
+                        in = false;
+                    }
+
+                    boolean ip;
+                    if (aplicaImpuestoProvincial.equalsIgnoreCase("Si")) {
+                        ip = true;
+                    } else {
+                        ip = false;
+                    }
+
+                    AbstractVehiculo nuevoVehiculo = vehiculoFactory.crearVehiculo(tipo, marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, ID, precioVehiculo, in, ip);
 
                     if (nuevoVehiculo != null) {
                         vehiculos.add(nuevoVehiculo);
@@ -223,39 +267,111 @@ public class menuAdmin {
                     ((AdminLog) instancia).generarReporte(pedidos);
 
                 } else if (opcion == 8) {
+                    final String AZUL = "\u001B[34m";
+                    final String VERDE = "\u001B[32m";
+                    final String ROJO = "\u001B[31m";
+                    final String RESET = "\u001B[0m";
 
-                    System.out.println("Ingrese los datos del nuevo pedido:");
-                    System.out.print("ID del pedido: ");
-                    int idPedido = scannerApp.nextInt();
-                    scannerApp.nextLine(); // Limpiar el buffer antes de leer la línea completa
+
+                    System.out.println(AZUL + "\n=== Ingrese los datos del nuevo pedido ===" + RESET);
+
+                    // ID del pedido
+                    int idPedido = -1;
+                    while (true) {
+                        try {
+                            System.out.print("ID del pedido: ");
+                            idPedido = scannerApp.nextInt();
+                            scannerApp.nextLine(); // Limpiar buffer
+                            break;
+                        } catch (Exception e) {
+                            System.out.println(ROJO + "⚠ Ingrese un número entero válido." + RESET);
+                            scannerApp.nextLine(); // Limpiar entrada inválida
+                        }
+                    }
+
+                    // Concesionario
                     System.out.print("Nombre del concesionario: ");
                     String nombreConcesionario = scannerApp.nextLine();
-                    System.out.print("CUIT del consecionario: ");
+
+                    System.out.print("CUIT del concesionario: ");
                     String cuitConcesionario = scannerApp.nextLine();
-                    System.out.print("Fecha: ");
+
+                    System.out.print("Fecha (dd/mm/yyyy): ");
                     String fecha = scannerApp.nextLine();
-                    System.out.println("A contunuacion ingrese los datos de facturacion");
+
+                    System.out.println(AZUL + "\n=== Ingrese los datos de facturación ===" + RESET);
+
+                    // Ver clientes y seleccionar uno
                     ((AdminLog) instancia).verClientes();
                     System.out.print("ID Cliente: ");
                     String idCliente = scannerApp.nextLine();
+
                     System.out.print("Dirección: ");
                     String direccion = scannerApp.nextLine();
-                    System.out.print("Cuil-Cuit: ");
+
+                    System.out.print("CUIL/CUIT: ");
                     String cuilCuit = scannerApp.nextLine();
-                    System.out.print("Costo Total: ");
-                    String costoTotal = scannerApp.nextLine();
-                    System.out.print("Forma de Pago(Transferencia/Contado/Tarjeta): ");
+
+                    System.out.print("Forma de Pago (Transferencia/Contado/Tarjeta): ");
                     String formaPago = scannerApp.nextLine();
-                    System.out.println("Seleccione un vehiculo: ");
+
+                    System.out.println(AZUL + "\n=== Seleccione un vehículo ===" + RESET);
                     ((AdminLog) instancia).verVehiculos(vehiculos);
-                    System.out.print("ID del vehículo: ");
-                    String idVehiculo = String.valueOf(scannerApp.nextInt());
+
+                    String idVehiculo;
+                    AbstractVehiculo vehiculoSeleccionado = null;
+                    while (true) {
+                        System.out.print("ID del vehículo: ");
+                        idVehiculo = scannerApp.next();
+                        vehiculoSeleccionado = buscarVehiculoPorID(idVehiculo, vehiculos);
+                        if (vehiculoSeleccionado != null) break;
+                        System.out.println(ROJO + "⚠ Vehículo no encontrado. Intente nuevamente." + RESET);
+                    }
+
+                    // Costo total
+                    double costoTotal = 0;
+                    while (true) {
+                        try {
+                            System.out.print("Costo Total: ");
+                            String costoStr = scannerApp.next();
+                            costoTotal = Double.parseDouble(costoStr);
+
+                            if (costoTotal < vehiculoSeleccionado.getPrecioVehiculo()) {
+                                System.out.println(ROJO + "⚠ El costo total no puede ser menor al valor del vehículo: $" + vehiculoSeleccionado.getPrecioVehiculo() + RESET);
+                            } else {
+                                break;
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println(ROJO + "⚠ Ingrese un valor numérico válido para el costo total." + RESET);
+                        }
+                    }
+
+                    // Seleccionar vendedor
+                    System.out.println(AZUL + "\n=== Seleccione un vendedor ===" + RESET);
                     datosVendedor.imprimirTodosLosVendedores();
-                    System.out.println("Seleccione un vendedor (ID): ");
+                    System.out.print("ID del vendedor: ");
                     String idVendedor = scannerApp.next();
-                    ((AdminLog) instancia).agregarPedido(idVehiculo, String.valueOf(idPedido), nombreConcesionario, cuitConcesionario, fecha, idCliente, direccion, cuilCuit, costoTotal, formaPago, idVendedor);
+
+                    // Agregar el pedido
+                    ((AdminLog) instancia).agregarPedido(
+                            idVehiculo,
+                            String.valueOf(idPedido),
+                            nombreConcesionario,
+                            cuitConcesionario,
+                            fecha,
+                            idCliente,
+                            direccion,
+                            cuilCuit,
+                            String.valueOf(costoTotal),
+                            formaPago,
+                            idVendedor
+                    );
+
+                    // Crear y guardar pedido
                     PedidoFactory pedidoFactory = new PedidoFactory();
-                    pedidos.add(pedidoFactory.crearPedido(String.valueOf(idPedido), idVehiculo , idVendedor)); // Asignar un pedido de ejemplo
+                    pedidos.add(pedidoFactory.crearPedido(String.valueOf(idPedido), idVehiculo, idVendedor));
+
+                    System.out.println(VERDE + "\n✓ Pedido agregado exitosamente." + RESET);
 
                 } else if (opcion == 9) {
                     System.out.println("Pedidos disponibles:");
@@ -266,6 +382,21 @@ public class menuAdmin {
                     System.out.print("Ingrese el ID del pedido a ver: ");
                     int id = scannerApp.nextInt();
                     ((AdminLog) instancia).verPedido(pedidos, String.valueOf(id));
+
+                    System.out.print("¿Desea actualizar el estado del pedido? (Si/No): ");
+                    String actualizar = scannerApp.next();
+                    if (esSiONo(actualizar) && actualizar.equalsIgnoreCase("si")) {
+                        System.out.print("Ingrese el nuevo estado: ");
+                        scannerApp.nextLine(); // Limpiar buffer
+                        String nuevoEstado = scannerApp.nextLine();
+                        for (PedidoDeCompra pedido : pedidos) {
+                            if (pedido.getIdPedido().equals(String.valueOf(id))) {
+                                pedido.actualizarEstadoPedido(nuevoEstado);
+                                System.out.println("Estado actualizado correctamente.");
+                                break;
+                            }
+                        }
+                    }
 
                 } else {
 

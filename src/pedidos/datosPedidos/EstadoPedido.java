@@ -14,12 +14,9 @@ public class EstadoPedido {
         System.out.println("El area a pasado a" + area);
     };
 
-    public void ActualizarEstado(){
+    public void ActualizarEstado(String nuevoEstado) {
+        this.area = nuevoEstado;
         System.out.println("El estado del pedido ha sido actualizado");
-    };
-
-    public void verEstadoActual(){
-        System.out.println("El pedido esta en " + area);
     };
 
     public String getArea() {

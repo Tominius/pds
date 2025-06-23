@@ -26,6 +26,10 @@ public class PedidoDeCompra {
         this.vendedor = vendedor;
     }
 
+    public void actualizarEstadoPedido(String nuevoEstado) {
+        datosPedido.actualizarEstado(nuevoEstado);
+    }
+
 
 
      public void imprimirDatos() {

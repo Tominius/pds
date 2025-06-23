@@ -11,8 +11,11 @@ public abstract class AbstractVehiculo {
         protected int num_de_motor;
         protected String caracteristicas;
         protected boolean disponible;
+        protected double precioVehiculo;
+        protected boolean aplicaImpuestoNacional;
+        protected boolean aplicaImpuestoProvincial;
 
-        public AbstractVehiculo(String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id) {
+        public AbstractVehiculo(String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id, double precioVehiculo, boolean aplicaImpuestoNacional, boolean aplicaImpuestoProvincial) {
             this.id = id;
             this.marca = marca;
             this.modelo = modelo;
@@ -26,18 +29,21 @@ public abstract class AbstractVehiculo {
             this.num_de_motor = Integer.parseInt(motor);
             this.caracteristicas = caracteristicas;
             this.disponible = disponible.equalsIgnoreCase("Si");
-
+            this.precioVehiculo = precioVehiculo;
+            this.aplicaImpuestoNacional = aplicaImpuestoNacional;
+            this.aplicaImpuestoProvincial = aplicaImpuestoProvincial;
         }
 
-        public abstract double impuestoNacionalAbstracto();
-        public abstract double impuestoProvinvialAddAbstracto();
+        public abstract void impuestoNacionalAbstracto(double precio);
+        public abstract void impuestoProvinvialAddAbstracto(double precio);
 
-        public double impuestoProvincialGeneral() {
+        public void impuestoProvincialGeneral() {
             // Implementación genérica, puede ser sobrescrita por subclases
-            return 0.0;
+            this.precioVehiculo += this.precioVehiculo * 0.05; // Ejemplo: 5% de impuesto provincial
         }
 
-        abstract public void imprimirDatos();
+
+    abstract public void imprimirDatos();
 
         public String getMarca() {
             return marca;
@@ -106,4 +112,8 @@ public abstract class AbstractVehiculo {
         public String getID() {
             return id;
         }
+
+    public double getPrecioVehiculo() {
+        return precioVehiculo;
+    }
 }

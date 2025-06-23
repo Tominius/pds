@@ -4,8 +4,8 @@ public class Camioneta extends AbstractVehiculo {
 
     boolean _4x4;
 
-    public Camioneta(String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id) {
-        super(marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, id);
+    public Camioneta(String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id, double precioVehiculo, boolean aplicaImpuestoNacional, boolean aplicaImpuestoProvincial) {
+        super(marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, id,precioVehiculo, aplicaImpuestoNacional, aplicaImpuestoProvincial);
         if (atributoEspecifico.equals("Si")) {
             this._4x4 = true; // Si es 4x4
         } else {
@@ -14,16 +14,15 @@ public class Camioneta extends AbstractVehiculo {
     }
 
     @Override
-    public double impuestoNacionalAbstracto() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'impuestoNacionalAbstracto'");
+    public void impuestoNacionalAbstracto(double precio) {
+        this.precioVehiculo = precio * 1.25; // Ejemplo: 25% de impuesto nacional
     }
 
     @Override
-    public double impuestoProvinvialAddAbstracto() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'impuestoProvinvialAddAbstracto'");
+    public void impuestoProvinvialAddAbstracto(double precio) {
+        this.precioVehiculo = precio * 1.10; // Ejemplo: 10% de impuesto provincial
     }
+
 
     @Override
     public void imprimirDatos() {
