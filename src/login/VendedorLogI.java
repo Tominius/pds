@@ -1,5 +1,7 @@
 package login;
 
+import vehiculos.AbstractVehiculo;
+
 public interface VendedorLogI {
-    void verVehiculosDisponibles();
+    void verVehiculosDisponibles(java.util.List<AbstractVehiculo> vehiculos);
 }

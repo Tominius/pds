@@ -67,5 +67,21 @@ public class VehiculoFactory {
         return null;
     }
 
+    public static AbstractVehiculo crearVehiculo(String tipo, String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id) {
+        switch (tipo.toLowerCase()) {
+            case "auto":
+                return new Auto(marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, id);
+            case "camion":
+                return new Camion(marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, id);
+            case "camioneta":
+                return new Camioneta(marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, id);
+            case "moto":
+                return new Moto(marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, id);
+            default:
+                System.out.println("Tipo de vehículo desconocido: " + tipo);
+                return null;
+        }
+    }
+
 
 }

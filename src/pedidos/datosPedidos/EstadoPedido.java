@@ -22,6 +22,10 @@ public class EstadoPedido {
         System.out.println("El pedido esta en " + area);
     };
 
+    public String getArea() {
+        return area;
+    }
+
 
 
 

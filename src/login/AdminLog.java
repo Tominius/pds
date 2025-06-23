@@ -2,8 +2,10 @@ package login;
 
 import datosUsuarios.Datos;
 import pedidos.DatosGeneral;
+import pedidos.PedidoDeCompra;
 import pedidos.datosFacturacion.DatosFacturacion;
 import pedidos.datosPedidos.DatosPedido;
+import vehiculos.AbstractVehiculo;
 import vehiculos.DatosVehiculos;
 
 public class AdminLog extends AbstractUserLog implements AdminLogI {
@@ -51,13 +53,35 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void verVehiculos() {//
+    public void verVehiculos(java.util.List<AbstractVehiculo> vehiculos) {//
         // Implementación del método para ver vehículos
-        datosVehiculos.verVehiculos();
+        for (AbstractVehiculo vehiculo : vehiculos) {
+            vehiculo.imprimirDatos();
+        }
+
     }
 
     @Override
-    public void generarReporte() {
+    public void generarReporte(java.util.List<PedidoDeCompra> pedidos) {
+
+        // Solicitar filtros por consola
+        java.util.Scanner scanner = new java.util.Scanner(System.in);
+        System.out.print("Ingrese la fecha a filtrar (dd/mm/yyyy) o presione Enter para omitir: ");
+        String fechaFiltro = scanner.nextLine().trim();
+        if (fechaFiltro.isEmpty()) fechaFiltro = null;
+
+        System.out.print("Ingrese el estado a filtrar o presione Enter para omitir: ");
+        String estadoFiltro = scanner.nextLine().trim();
+        if (estadoFiltro.isEmpty()) estadoFiltro = null;
+
+        System.out.println("Reporte de Pedidos de Compra:");
+        for (PedidoDeCompra pedido : pedidos) {
+            boolean coincideFecha = (fechaFiltro == null || pedido.getFecha().equals(fechaFiltro));
+            boolean coincideEstado = (estadoFiltro == null || pedido.getEstado().equalsIgnoreCase(estadoFiltro));
+            if (coincideFecha && coincideEstado) {
+                pedido.imprimirDatos();
+            }
+        }
 
     }
 
@@ -69,8 +93,15 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void verPedido(int id) {
-        // Implementación del método para ver un pedido por ID
+    public void verPedido(java.util.List<PedidoDeCompra> pedidos , String id) {
+        // Implementación del método para ver un pedido
+        for (PedidoDeCompra pedido : pedidos) {
+            if (pedido.getIdPedido().equals(id)) {
+                pedido.imprimirDatos();
+                return;
+            }
+        }
+        System.out.println("Pedido no encontrado con ID: " + id);
     }
 
     @Override

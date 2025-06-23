@@ -8,7 +8,7 @@ public class DatosVehiculos {
 
     String ruta = "src/vehiculos/vehiculos.csv";
 
-    public void verVehiculos() {
+    /*public void verVehiculos() {
         try {
             java.nio.file.Path path = java.nio.file.Paths.get(ruta);
             if (!java.nio.file.Files.exists(path)) {
@@ -46,7 +46,7 @@ public class DatosVehiculos {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
+    }*/
 
     public void insertarVehiculo(String tipo, String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id) {
         try {

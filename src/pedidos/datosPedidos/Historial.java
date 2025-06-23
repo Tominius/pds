@@ -10,4 +10,11 @@ public class Historial {
         this.idPedido = dato;
         this.cambios = cambios.toArray(new String[0]);
     }
+
+    public void imprimirHistorial() {
+        System.out.println("Historial de Cambios del Pedido:");
+        for (String cambio : cambios) {
+            System.out.print("- " + cambio);
+        }
+    }
 }

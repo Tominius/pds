@@ -17,4 +17,25 @@ public class Facturacion {
         this.costoTotal = costoTotal;
         this.cliente = cliente;
     }
+
+    public void imprimirDatos() {
+        System.out.println("Datos de Facturación:");
+        System.out.print("Dirección: " + direccion +"|");
+        System.out.print("CUIT/CUIL: " + cuit_cuil+"|");
+        System.out.print("Forma de Pago: " + formaDePago+"|");
+        System.out.print("Costo Total: " + costoTotal+"|");
+        System.out.println("Cliente: " + cliente.getUsername());
+    }
+
+    public String getIdCliente() {
+        return cliente.getUsername();
+    }
+
+    public String getTotal() {
+        return costoTotal;
+    }
+
+    public String getUsernameCliente() {
+        return cliente.getUsername();
+    }
 }

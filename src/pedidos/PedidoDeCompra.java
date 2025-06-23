@@ -28,7 +28,37 @@ public class PedidoDeCompra {
 
 
 
-     // Estructura: ID Pedido, Nombre, Apellido, CUIT, Dirección, Email, Teléfono
+     public void imprimirDatos() {
+         System.out.println("Pedido de Compra:");
+         System.out.println("ID del Pedido: " + idPedido);
+         datosPedido.imprimirDatos();
+         datosFacturacion.imprimirDatos();
+         vehiculo.imprimirDatos();
+         vendedor.imprimirAtributos();
+     }
 
+     public String getIdPedido() {
+         return idPedido;
+     }
+
+     public String getFecha() {
+         return datosPedido.getFecha();
+     }
+
+     public String getEstado() {
+        return datosPedido.getEstado();
+     }
+
+     public String getIdCliente() {
+        return datosFacturacion.getIdCliente();
+     }
+
+     public String getTotal() {
+        return datosFacturacion.getTotal();
+     }
+
+     public String getCliente() {
+         return datosFacturacion.getUsernameCliente();
+     }
 
 }

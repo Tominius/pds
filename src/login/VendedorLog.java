@@ -1,5 +1,7 @@
 package login;
 
+import vehiculos.AbstractVehiculo;
+
 public class VendedorLog extends AbstractUserLog implements VendedorLogI {
 
     private String email;
@@ -10,25 +12,22 @@ public class VendedorLog extends AbstractUserLog implements VendedorLogI {
     }
 
 
-
-
-    public void verEstadoCompra() {
-        // Implementación del método para ver el estado de la compra
-        System.out.println("Estado de la compra: Contaduria");
-    }
-
     @Override
-    public void verVehiculosDisponibles() {
+    public void verVehiculosDisponibles(java.util.List<AbstractVehiculo> vehiculos) {
         // Implementación del método para ver los vehículos disponibles
-        System.out.println("Vehículos disponibles: [Vehículo 1, Vehículo 2, Vehículo 3]");
+        for (AbstractVehiculo vehiculo : vehiculos) {
+            if (vehiculo.isDisponible()) {
+                vehiculo.imprimirDatos();
+            }
+        }
     }
 
 
 
     @Override
     public void imprimirAtributos() {
-        System.out.println("Usuario: " + getUsuario());
-        System.out.println("Contraseña: " + getContrasena());
+        System.out.print("Usuario: " + getUsuario()+"|");
+        System.out.print("Contraseña: " + getContrasena()+"|");
         System.out.println("Email: " + email);
     }
 

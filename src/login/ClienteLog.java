@@ -1,5 +1,8 @@
 package login;
 
+import pedidos.PedidoDeCompra;
+import vehiculos.AbstractVehiculo;
+
 public class ClienteLog extends AbstractUserLog implements ClienteLogI {
 
     private String dni;
@@ -31,15 +34,29 @@ public class ClienteLog extends AbstractUserLog implements ClienteLogI {
     }
 
     @Override
-    public void verEstadoCompra() {
+    public void verEstadoCompra( java.util.List<PedidoDeCompra> pedidos) {
         // Implementación del método para ver el estado de la compra
-        System.out.println("Estado de la compra: En proceso");
+        for (PedidoDeCompra pedido : pedidos) {
+            if (pedido.getCliente().equals(getUsuario())) {
+                System.out.println(pedido.getIdPedido());
+                System.out.println(pedido.getFecha());
+                System.out.println(pedido.getEstado());
+            }
+        }
     }
 
     @Override
-    public void verVehiculosDisponibles() {
+    public void verVehiculosDisponibles(java.util.List<AbstractVehiculo> vehiculos) {
         // Implementación del método para ver los vehículos disponibles
-        System.out.println("Vehículos disponibles: [Vehículo 1, Vehículo 2, Vehículo 3]");
+        for (AbstractVehiculo vehiculo : vehiculos) {
+            if (vehiculo.isDisponible()) {
+                vehiculo.imprimirDatos();
+            }
+        }
+    }
+
+    public String getUsername() {
+        return getUsuario();
     }
 
 }

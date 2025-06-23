@@ -42,7 +42,6 @@ public class UsersFactory {
             while ((linea = br.readLine()) != null) {
                 String[] campos = linea.split(",");
                 if (campos.length < 7) {
-                    System.out.println("Formato de línea inválido: " + linea);
                     continue;
                 }
                 String tipo = campos[2].trim().toLowerCase();
@@ -62,7 +61,6 @@ public class UsersFactory {
             while ((linea = br.readLine()) != null) {
                 String[] campos = linea.split(",");
                 if (campos.length < 4) {
-                    System.out.println("Formato de línea inválido: " + linea);
                     continue;
                 }
                 String tipo = campos[2].trim().toLowerCase();
@@ -75,4 +73,10 @@ public class UsersFactory {
         }
         return null;
     }
+
+    public ClienteLog devuelveClienteLog(String username, String contraseña, String dni, String telefono, String email) {
+        return new ClienteLog(username, contraseña, dni, telefono, email);
+    }
+
+
 }

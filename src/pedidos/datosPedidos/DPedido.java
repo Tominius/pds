@@ -13,4 +13,20 @@ public class DPedido {
         this.fecha = fecha;
         this.historial = historial;
     }
+
+    public void imprimirDatos() {
+        System.out.println("Datos del Pedido:");
+        System.out.print("Concesionaria: " + concesionaria.getNombre()+"|");
+        System.out.print("Estado del Pedido: " + estadoPedido.getArea()+"|");
+        System.out.print("Fecha: " + fecha+"|");
+        historial.imprimirHistorial();
+    }
+
+    public String getFecha() {
+        return fecha;
+    }
+
+    public String getEstado() {
+        return estadoPedido.getArea();
+    }
 }

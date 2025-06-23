@@ -25,6 +25,20 @@ public class Camioneta extends AbstractVehiculo {
         throw new UnsupportedOperationException("Unimplemented method 'impuestoProvinvialAddAbstracto'");
     }
 
+    @Override
+    public void imprimirDatos() {
+        System.out.println("Tipo: Camioneta");
+        System.out.println("Marca: " + getMarca());
+        System.out.println("Modelo: " + getModelo());
+        System.out.println("Color: " + getColor());
+        System.out.println("Número de Chasis: " + getNumero_de_chasis());
+        System.out.println("Número de Motor: " + getNum_de_motor());
+        System.out.println("Características: " + getCaracteristicas());
+        System.out.println("Disponible: " + (isDisponible() ? "Sí" : "No"));
+        System.out.println("4x4: " + (_4x4 ? "Sí" : "No"));
+        System.out.println("ID del Vehículo: " + getID());
+    }
+
     
 
 }

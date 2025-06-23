@@ -194,7 +194,7 @@ public class Datos {
             java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
             for (String line : lines) {
                 String[] partes = line.split(",");
-                if (partes.length >= 6 && partes[0].equals(username) && "vendedor".equals(partes[2])) {
+                if (partes.length >= 5 && partes[0].equals(username) && "vendedor".equals(partes[2])) {
                     // username, contraseña, email
                     datosVendedor.add(partes[0]); // username
                     datosVendedor.add(partes[1]); // contraseña
