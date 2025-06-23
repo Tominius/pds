@@ -10,5 +10,9 @@ public abstract class FormaDePago {
         this.metodo = metodo;
     }
 
+    public String getMetodo() {
+        return metodo;
+    }
+
     public abstract void Mensaje();
 }

@@ -1,6 +1,7 @@
 package login;
 
 import pedidos.PedidoDeCompra;
+import pedidos.reportes.ReporteCliente;
 import vehiculos.AbstractVehiculo;
 
 public class ClienteLog extends AbstractUserLog implements ClienteLogI {
@@ -26,22 +27,37 @@ public class ClienteLog extends AbstractUserLog implements ClienteLogI {
 
     @Override
     public void imprimirAtributos() {
-        System.out.println("Usuario: " + getUsuario());
-        System.out.println("Contraseña: " + getContrasena());
-        System.out.println("DNI: " + dni);
-        System.out.println("Teléfono: " + telefono);
+        System.out.print("Usuario: " + getUsuario() + "| ");
+        System.out.print("Contraseña: " + getContrasena()+ "| ");
+        System.out.print("DNI: " + dni+ "| ");
+        System.out.print("Teléfono: " + telefono+ "| ");
         System.out.println("Email: " + email);
     }
 
     @Override
     public void verEstadoCompra( java.util.List<PedidoDeCompra> pedidos) {
+
+        final String AZUL = "\u001B[34m";
+        final String VERDE = "\u001B[32m";
+        final String RESET = "\u001B[0m";
+
+        ReporteCliente reporteCliente = new ReporteCliente(this.getUsuario());
         // Implementación del método para ver el estado de la compra
+        boolean tienePedidos = false;
+
         for (PedidoDeCompra pedido : pedidos) {
             if (pedido.getCliente().equals(getUsuario())) {
-                System.out.println(pedido.getIdPedido());
-                System.out.println(pedido.getFecha());
-                System.out.println(pedido.getEstado());
+                tienePedidos = true;
+                System.out.printf("%-15s %s%s%s\n", "ID Pedido:", VERDE, pedido.getIdPedido(), RESET);
+                System.out.printf("%-15s %s%s%s\n", "Fecha:", VERDE, pedido.getFecha(), RESET);
+                System.out.printf("%-15s %s%s%s\n", "Estado:", VERDE, pedido.getEstado(), RESET);
+                System.out.println("-----------------------------------------");
+                reporteCliente.agregarPedido(pedido);
             }
+        }
+
+        if (!tienePedidos) {
+            System.out.println(VERDE + "No se encontraron pedidos asociados al cliente." + RESET);
         }
     }
 

@@ -10,11 +10,15 @@ import vehiculos.VehiculoFactory;
 public class App {
     public static void main(String[] args) throws Exception {
 
+        final String AZUL = "\u001B[34m";
+        final String RESET = "\u001B[0m";
 
-
-
-        System.out.println("Bienvenido al sistema de gestión de Consesionaria");
-        System.out.println("Por favor, inicie sesión.");
+        String mensaje = "Bienvenido al sistema de gestión de Consesionaria";
+        int ancho = 80;
+        int espacios = (ancho - mensaje.length()) / 2;
+        System.out.println();
+        System.out.println(AZUL + " ".repeat(Math.max(0, espacios)) + mensaje + RESET);
+        System.out.println();
 
         // Logearse y crear una instancia de AbstractUserLog
 

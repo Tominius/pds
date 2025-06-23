@@ -12,6 +12,11 @@ public class Login {
     private String password;
 
     public AbstractUserLog loginYCrearInstancia() {
+
+        final String VERDE = "\u001B[32m";
+        final String RESET = "\u001B[0m";
+
+
         Scanner scanner = new Scanner(System.in);
 
         System.out.print("Ingrese su username: ");
@@ -24,7 +29,13 @@ public class Login {
 
         if (datos.usuarioExiste(this.username)) {
             if (datos.verificarUsuario(this.username, this.password)) {
-                System.out.println("Bienvenido " + this.username);
+
+                String mensaje = "Bienvenido " + this.username;
+                int ancho = 80;
+                int espacios = (ancho - mensaje.length()) / 2;
+                System.out.println();
+                System.out.println(VERDE + " ".repeat(Math.max(0, espacios)) + mensaje + RESET);
+                System.out.println();
                 instancia = crearInstancia();
             } else {
                 System.out.println("Contraseña incorrecta.");

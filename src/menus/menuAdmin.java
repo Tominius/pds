@@ -40,6 +40,10 @@ public class menuAdmin {
     }
 
     // Menu Administrador
+    public static boolean esSiONo(String entrada) {
+        String normalizada = entrada.toLowerCase().replace("í", "i");
+        return normalizada.equals("si") || normalizada.equals("no");
+    }
 
     public void mostrarMenu() {
 
@@ -51,6 +55,7 @@ public class menuAdmin {
 
             while (opcion != 0) {
                 // Aquí puedes mostrar el menú y leer la opción del usuario
+                System.out.println();
                 System.out.println("Menú de opciones:");
                 System.out.println("1. Ver clientes");
                 System.out.println("2. Agregar cliente");
@@ -62,8 +67,9 @@ public class menuAdmin {
                 System.out.println("8. Agregar pedido");
                 System.out.println("9. Ver pedido");
                 System.out.println();
-                System.out.println("Ingrese una opción (0 para salir):");
+                System.out.print("Ingrese una opción (0 para salir):");
                 opcion = scannerApp.nextInt();
+                System.out.println();
                 // Procesar la opción aquí
                 if (opcion == 0) {
                     System.out.println("Saliendo del sistema...");
@@ -82,58 +88,113 @@ public class menuAdmin {
                     String telefono = scannerApp.next();
                     System.out.print("Email: ");
                     String email = scannerApp.next();
+                    System.out.println();
                     ((AdminLog) instancia).agregarCliente(username, contraseña, dni, telefono, email);
                     // Agregar el cliente a la lista local
                     usuarios.add(usersF.devuelveClienteLog(username, contraseña, dni, telefono, email));
                 } else if (opcion == 3) { //
-                    System.out.print("Ingrese el username del cliente a eliminar: ");
-                    String username = scannerApp.next();
+
                     for (AbstractUserLog user : usuarios) {
                         if (user instanceof ClienteLog) {
                             user.imprimirAtributos();
                         }
                     }
+                    System.out.println();
+                    System.out.print("Ingrese el username del cliente a eliminar: ");
+                    String username = scannerApp.next();
                     ((AdminLog) instancia).eliminarCliente(username);
                     // Eliminar el cliente de la lista local
                     usuarios.removeIf(user -> user instanceof ClienteLog && ((ClienteLog) user).getUsername().equals(username));
 
                 } else if (opcion == 4) {
 
-                    System.out.println("Ingrese los datos del vehículo a cargar:");
-                    System.out.print("Tipo (Auto/Moto/Camión/Camioneta): ");
-                    String tipo = scannerApp.next();
+                    final String VERDE = "\u001B[32m";
+                    final String AMARILLO = "\u001B[33m";
+                    final String RESET = "\u001B[0m";
+
+                    System.out.println(VERDE + "=== Ingrese los datos del vehículo a cargar ===" + RESET);
+
+                    String tipo = "";
+                    while (true) {
+                        System.out.print("Tipo (Auto/Moto/Camión/Camioneta): ");
+                        tipo = scannerApp.next();
+                        if (tipo.equalsIgnoreCase("Auto") || tipo.equalsIgnoreCase("Moto") ||
+                                tipo.equalsIgnoreCase("Camion") || tipo.equalsIgnoreCase("Camión") ||
+                                tipo.equalsIgnoreCase("Camioneta")) break;
+                        System.out.println(AMARILLO + "Tipo no válido. Ingrese Auto, Moto, Camión o Camioneta." + RESET);
+                    }
+
                     System.out.print("Marca: ");
                     String marca = scannerApp.next();
+
                     System.out.print("Modelo: ");
                     String modelo = scannerApp.next();
+
                     System.out.print("Color: ");
                     String color = scannerApp.next();
+
                     System.out.print("Equipamiento Adicional: ");
                     String equipAdicional = scannerApp.next();
+
                     System.out.print("Número de Chasis: ");
                     String chasis = scannerApp.next();
+
                     System.out.print("Número de Motor: ");
                     String motor = scannerApp.next();
-                    scannerApp.nextLine(); // Limpiar el buffer antes de leer la línea completa
+
+                    scannerApp.nextLine(); // Limpiar buffer
                     System.out.print("Características: ");
                     String caracteristicas = scannerApp.nextLine();
-                    System.out.print("Disponible (Sí/No): ");
-                    String disponible = scannerApp.next();
-                    if (tipo.equalsIgnoreCase("Auto")) {
-                        System.out.print("Tracción Delantera (Sí/No): ");
-                    } else if (tipo.equalsIgnoreCase("Moto")) {
-                        System.out.print("Deportiva (Sí/No): ");
-                    } else if (tipo.equalsIgnoreCase("Camion")) {
-                        System.out.print("Acoplado (Sí/No): ");
-                    } else if (tipo.equalsIgnoreCase("Camioneta")) {
-                        System.out.print("4x4 (Sí/No): ");
+
+                    String disponible = "";
+                    while (true) {
+                        System.out.print("Disponible (Si/No): ");
+                        disponible = scannerApp.next();
+                        if (esSiONo(disponible)) break;
+                        System.out.println(AMARILLO + "Respuesta no válida. Ingrese Si o No." + RESET);
                     }
-                    String atributoEspecifico = scannerApp.next();
+
+                    String atributoEspecifico = "";
+
+                    if (tipo.equalsIgnoreCase("Auto")) {
+                        while (true) {
+                            System.out.print("Tracción Delantera (Si/No): ");
+                            atributoEspecifico = scannerApp.next();
+                            if (esSiONo(atributoEspecifico)) break;
+                            System.out.println(AMARILLO + "Respuesta no válida. Ingrese Si o No." + RESET);
+                        }
+                    } else if (tipo.equalsIgnoreCase("Moto")) {
+                        while (true) {
+                            System.out.print("Deportiva (Si/No): ");
+                            atributoEspecifico = scannerApp.next();
+                            if (esSiONo(atributoEspecifico)) break;
+                            System.out.println(AMARILLO + "Respuesta no válida. Ingrese Si o No." + RESET);
+                        }
+                    } else if (tipo.equalsIgnoreCase("Camion") || tipo.equalsIgnoreCase("Camión")) {
+                        while (true) {
+                            System.out.print("Acoplado (Si/No): ");
+                            atributoEspecifico = scannerApp.next();
+                            if (esSiONo(atributoEspecifico)) break;
+                            System.out.println(AMARILLO + "Respuesta no válida. Ingrese Si o No." + RESET);
+                        }
+                    } else if (tipo.equalsIgnoreCase("Camioneta")) {
+                        while (true) {
+                            System.out.print("4x4 (Si/No): ");
+                            atributoEspecifico = scannerApp.next();
+                            if (esSiONo(atributoEspecifico)) break;
+                            System.out.println(AMARILLO + "Respuesta no válida. Ingrese Si o No." + RESET);
+                        }
+                    }
+
                     System.out.print("ID del vehículo: ");
                     String ID = scannerApp.next();
+
+                    System.out.println(VERDE + "\n✓ Vehículo cargado correctamente." + RESET);
+
                     ((AdminLog) instancia).cargarVehiculo(tipo, marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, ID);
                     // Agregar el vehículo a la lista local
                     AbstractVehiculo nuevoVehiculo = vehiculoFactory.crearVehiculo(tipo, marca, modelo, color, equipAdicional, chasis, motor, caracteristicas, disponible, atributoEspecifico, ID);
+
                     if (nuevoVehiculo != null) {
                         vehiculos.add(nuevoVehiculo);
                         System.out.println("Vehículo agregado correctamente.");
@@ -142,6 +203,10 @@ public class menuAdmin {
                     }
 
                 } else if (opcion == 5) {
+
+                    for (AbstractVehiculo vehiculo : vehiculos) {
+                        vehiculo.imprimirDatos();
+                    }
 
                     System.out.print("Ingrese el ID del vehículo a eliminar: ");
                     String id = scannerApp.next();
@@ -193,6 +258,10 @@ public class menuAdmin {
                     pedidos.add(pedidoFactory.crearPedido(String.valueOf(idPedido), idVehiculo , idVendedor)); // Asignar un pedido de ejemplo
 
                 } else if (opcion == 9) {
+                    System.out.println("Pedidos disponibles:");
+                    for (PedidoDeCompra pedido : pedidos) {
+                        System.out.println("ID del Pedido: " + pedido.getIdPedido() + " | Fecha: " + pedido.getFecha() + " | Estado: " + pedido.getEstado());
+                    }
 
                     System.out.print("Ingrese el ID del pedido a ver: ");
                     int id = scannerApp.nextInt();

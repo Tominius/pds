@@ -27,16 +27,22 @@ public class Camion extends AbstractVehiculo {
 
     @Override
     public void imprimirDatos() {
-        System.out.println("Tipo: Camión");
-        System.out.println("Marca: " + getMarca());
-        System.out.println("Modelo: " + getModelo());
-        System.out.println("Color: " + getColor());
-        System.out.println("Número de Chasis: " + getNumero_de_chasis());
-        System.out.println("Número de Motor: " + getNum_de_motor());
-        System.out.println("Características: " + getCaracteristicas());
-        System.out.println("Disponible: " + (isDisponible() ? "Sí" : "No"));
-        System.out.println("Acoplado: " + (acoplado ? "Sí" : "No"));
-        System.out.println("ID del Vehículo: " + getID());
+        final String AZUL = "\u001B[34m";
+        final String VERDE = "\u001B[32m";
+        final String RESET = "\u001B[0m";
+
+        System.out.println(AZUL + "========== FICHA DEL VEHÍCULO ==========" + RESET);
+        System.out.printf("%-25s %s%s%s\n", "Tipo:", VERDE, "Camión", RESET);
+        System.out.printf("%-25s %s%s%s\n", "Marca:", VERDE, getMarca(), RESET);
+        System.out.printf("%-25s %s%s%s\n", "Modelo:", VERDE, getModelo(), RESET);
+        System.out.printf("%-25s %s%s%s\n", "Color:", VERDE, getColor(), RESET);
+        System.out.printf("%-25s %s%s%s\n", "Número de Chasis:", VERDE, getNumero_de_chasis(), RESET);
+        System.out.printf("%-25s %s%s%s\n", "Número de Motor:", VERDE, getNum_de_motor(), RESET);
+        System.out.printf("%-25s %s%s%s\n", "Características:", VERDE, getCaracteristicas(), RESET);
+        System.out.printf("%-25s %s%s%s\n", "Disponible:", VERDE, isDisponible() ? "Sí" : "No", RESET);
+        System.out.printf("%-25s %s%s%s\n", "Acoplado:", VERDE, acoplado ? "Sí" : "No", RESET);
+        System.out.printf("%-25s %s%s%s\n", "ID del Vehículo:", VERDE, getID(), RESET);
+        System.out.println(AZUL + "========================================" + RESET);
     }
 
 

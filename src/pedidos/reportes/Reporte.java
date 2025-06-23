@@ -4,14 +4,16 @@ import pedidos.PedidoDeCompra;
 import pedidos.datosFacturacion.FormaDePago;
 
 public class Reporte {
-    private java.util.List<PedidoDeCompra> pedidos;
-    //private FormaDePago metodoPago;
-    private ReporteCliente[] reportesClientes;
 
-    public Reporte(java.util.List<PedidoDeCompra> pedidos, /*FormaDePago metodoPago,*/ ReporteCliente[] reportesClientes) {
+    private String fecha;
+    private String estado;
+    private java.util.List<PedidoDeCompra> pedidos;
+
+
+    public Reporte(java.util.List<PedidoDeCompra> pedidos, /*FormaDePago metodoPago,*/String fecha, String estado) {
         this.pedidos = pedidos;
-        //this.metodoPago = metodoPago;
-        this.reportesClientes = reportesClientes;
+        this.fecha = fecha;
+        this.estado = estado;
     }
 
     public void agregarPedido(PedidoDeCompra nuevoPedido) {

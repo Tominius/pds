@@ -29,12 +29,20 @@ public class PedidoDeCompra {
 
 
      public void imprimirDatos() {
-         System.out.println("Pedido de Compra:");
-         System.out.println("ID del Pedido: " + idPedido);
+         final String AZUL = "\u001B[34m";
+         final String VERDE = "\u001B[32m";
+         final String CYAN = "\u001B[36m";
+         final String RESET = "\u001B[0m";
+
+         System.out.println(AZUL + "\n========== PEDIDO DE COMPRA ==========" + RESET);
+         System.out.printf("%-20s %s%s%s\n", "ID del Pedido:", VERDE, idPedido, RESET);
+
          datosPedido.imprimirDatos();
          datosFacturacion.imprimirDatos();
          vehiculo.imprimirDatos();
          vendedor.imprimirAtributos();
+
+         System.out.println(AZUL + "======================================" + RESET);
      }
 
      public String getIdPedido() {

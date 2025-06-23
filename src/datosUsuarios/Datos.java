@@ -223,6 +223,7 @@ public class Datos {
                 for (java.util.List<String> cliente : clientes) {
                     System.out.println("Nombre: "+ cliente.get(0) + " | DNI: " + cliente.get(3) + " | Telefono: " + cliente.get(4) + " | Email: " + cliente.get(5) + " | ID: " + cliente.get(6));
                 }
+                System.out.println();
             }
         } catch (IOException e) {
             e.printStackTrace();

@@ -42,14 +42,15 @@ public class menuCliente {
 
             while (opcion != 0) {
                 // Aquí puedes mostrar el menú y leer la opción del usuario
+                System.out.println();
                 System.out.println("Menú de opciones:");
                 System.out.println("1. Ver vehículos disponibles");
                 System.out.println("2. Ver estado de Compra");
                 System.out.println();
-                System.out.println("Ingrese una opción (0 para salir):");
+                System.out.print("Ingrese una opción (0 para salir):");
 
                 opcion = scannerApp.nextInt();
-
+                System.out.println();
                 if (opcion == 1){
                     ((ClienteLog) instancia).verVehiculosDisponibles(vehiculos);
                 }
