@@ -1,6 +1,10 @@
 package login;
 
+import datosUsuarios.Datos;
+import pedidos.DatosGeneral;
 import pedidos.PedidoDeCompra;
+import pedidos.datosFacturacion.DatosFacturacion;
+import pedidos.datosPedidos.DatosPedido;
 import pedidos.reportes.ReporteCliente;
 import vehiculos.AbstractVehiculo;
 
@@ -9,12 +13,25 @@ public class ClienteLog extends AbstractUserLog implements ClienteLogI {
     private String dni;
     private String telefono;
     private String email;
+    Datos datos = new Datos();
+    DatosFacturacion datosFacturacion = new DatosFacturacion();
+    DatosGeneral datosGeneral = new DatosGeneral();
+    DatosPedido datosPedidos = new DatosPedido();
+
 
     public ClienteLog(String usuario, String contrasena, String dni, String telefono, String email) {
         super(usuario, contrasena);
         this.dni = dni;
         this.telefono = telefono;
         this.email = email;
+
+
+    }
+
+    public void verClientes() {
+        // Implementación del método para ver clientes
+
+        datos.imprimirTodosLosClientes();
     }
 
     public String getDni() {
@@ -59,6 +76,11 @@ public class ClienteLog extends AbstractUserLog implements ClienteLogI {
         if (!tienePedidos) {
             System.out.println(VERDE + "No se encontraron pedidos asociados al cliente." + RESET);
         }
+    }
+    public void agregarPedido(String idVehiculo,String idPedido,String nombreConcesionario, String cuitConcesionario, String fecha, String idCliente, String direccion, String cuilCuit, String costoTotal, String formaPago, String idVendedor) {
+        datosPedidos.cargarDatosPedidos(Integer.parseInt(idPedido), fecha,nombreConcesionario, cuitConcesionario);
+        datosFacturacion.cargarDatosFacturacion(idPedido,costoTotal, formaPago, idCliente, direccion, cuilCuit);
+        datosGeneral.cargarDatosGeneral(String.valueOf(idPedido), idVehiculo, idCliente,idVendedor); // Aquí deberías pasar el ID del vehículo correspondiente
     }
 
     @Override

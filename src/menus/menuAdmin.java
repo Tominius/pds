@@ -10,6 +10,9 @@ import pedidos.PedidoFactory;
 import vehiculos.AbstractVehiculo;
 import vehiculos.VehiculoFactory;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
@@ -135,23 +138,71 @@ public class menuAdmin {
                         System.out.println(AMARILLO + "Tipo no válido. Ingrese Auto, Moto, Camión o Camioneta." + RESET);
                     }
 
-                    System.out.print("Marca: ");
-                    String marca = scannerApp.next();
+                    String marca;
+                    while (true) {
+                        System.out.print("Marca: ");
+                        if (scannerApp.hasNext("[A-Za-zÁÉÍÓÚáéíóúÑñ\\s]+")) {
+                            marca = scannerApp.next();
+                            break;
+                        } else {
+                            System.out.println(AMARILLO + "Marca no válida. vuelva a ingresar." + RESET);
+                            scannerApp.next(); // Limpiar entrada inválida
+                        }
+                    }
 
-                    System.out.print("Modelo: ");
-                    String modelo = scannerApp.next();
+                    String modelo;
+                    while (true) {
+                        System.out.print("Modelo: ");
+                        if (scannerApp.hasNext("[A-Za-z0-9\\-\\s]+")) {
+                            modelo = scannerApp.next();
+                            break;
+                        } else {
+                            System.out.println(AMARILLO + "Modelo no válido. vuelva a ingresar." + RESET);
+                            scannerApp.next(); // Limpiar entrada inválida
+                        }
+                    }
 
-                    System.out.print("Color: ");
-                    String color = scannerApp.next();
+                    String color;
+                    while (true) {
+                        System.out.print("Color: ");
+                        if (scannerApp.hasNext("[A-Za-zÁÉÍÓÚáéíóúÑñ\\s]+")) {
+                            color = scannerApp.next();
+                            break;
+                        } else {
+                            System.out.println(AMARILLO + "Color no válido. vuelva a ingresar." + RESET);
+                            scannerApp.next(); // Limpiar entrada inválida
+                        }
+                    }
 
-                    System.out.print("Equipamiento Adicional: ");
-                    String equipAdicional = scannerApp.next();
+                    String equipAdicional = "";
+                    while (true) {
+                        System.out.print("Equipamiento Adicional (Si/No): ");
+                        equipAdicional = scannerApp.next();
+                        if (esSiONo(equipAdicional)) break;
+                        System.out.println(AMARILLO + "Respuesta no válida. Ingrese Si o No." + RESET);
+                    }
 
-                    System.out.print("Número de Chasis: ");
-                    String chasis = scannerApp.next();
+                    String chasis;
+                    while (true) {
+                        System.out.print("Número de Chasis: ");
+                        chasis = scannerApp.next();
+                        if (chasis.matches("\\d+")) {
+                            break;
+                        } else {
+                            System.out.println(AMARILLO + "El número de chasis solo puede contener números. Intente nuevamente." + RESET);
+                        }
+                    }
 
-                    System.out.print("Número de Motor: ");
-                    String motor = scannerApp.next();
+                    String motor;
+                    while (true) {
+                        System.out.print("Número de Motor: ");
+                        motor = scannerApp.next();
+                        if (motor.matches("\\d+")) {
+                            break;
+                        } else {
+                            System.out.println(AMARILLO + "El número de motor solo puede contener números. Intente nuevamente." + RESET);
+                        }
+                    }
 
                     scannerApp.nextLine(); // Limpiar buffer
                     System.out.print("Características: ");
@@ -296,8 +347,29 @@ public class menuAdmin {
                     System.out.print("CUIT del concesionario: ");
                     String cuitConcesionario = scannerApp.nextLine();
 
-                    System.out.print("Fecha (dd/mm/yyyy): ");
-                    String fecha = scannerApp.nextLine();
+                    // Validar fecha
+                    String fechaFiltro = null;
+                    String estadoFiltro = null;
+                    Date fecha = null;
+
+                    while (true) {
+                        System.out.print("Ingrese la fecha (dd/mm/yyyy) o presione Enter para omitir: ");
+                        String inputFecha = scannerApp.nextLine().trim();
+
+                        if (inputFecha.isEmpty()) {
+                            break;
+                        }
+
+                        try {
+                            SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+                            sdf.setLenient(false); // No permite fechas inválidas como 32/01/2024
+                            fecha = sdf.parse(inputFecha);
+                            fechaFiltro = inputFecha;
+                            break;
+                        } catch (ParseException e) {
+                            System.out.println(ROJO + "⚠ Fecha inválida. Asegúrese de usar el formato dd/mm/yyyy." + RESET);
+                        }
+                    }
 
                     System.out.println(AZUL + "\n=== Ingrese los datos de facturación ===" + RESET);
 
@@ -358,7 +430,7 @@ public class menuAdmin {
                             String.valueOf(idPedido),
                             nombreConcesionario,
                             cuitConcesionario,
-                            fecha,
+                            fecha.toString(),
                             idCliente,
                             direccion,
                             cuilCuit,
