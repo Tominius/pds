@@ -380,23 +380,19 @@ public class menuAdmin {
                     }
 
                     System.out.print("Ingrese el ID del pedido a ver: ");
-                    int id = scannerApp.nextInt();
-                    ((AdminLog) instancia).verPedido(pedidos, String.valueOf(id));
-
-                    System.out.print("¿Desea actualizar el estado del pedido? (Si/No): ");
-                    String actualizar = scannerApp.next();
-                    if (esSiONo(actualizar) && actualizar.equalsIgnoreCase("si")) {
-                        System.out.print("Ingrese el nuevo estado: ");
-                        scannerApp.nextLine(); // Limpiar buffer
-                        String nuevoEstado = scannerApp.nextLine();
-                        for (PedidoDeCompra pedido : pedidos) {
-                            if (pedido.getIdPedido().equals(String.valueOf(id))) {
-                                pedido.actualizarEstadoPedido(nuevoEstado);
-                                System.out.println("Estado actualizado correctamente.");
-                                break;
-                            }
+                    int id;
+                    while (true) {
+                        try {
+                            id = scannerApp.nextInt();
+                            break;
+                        } catch (Exception e) {
+                            System.out.println("⚠ Ingrese un número entero válido.");
+                            scannerApp.nextLine(); // Limpiar entrada inválida
                         }
                     }
+                    ((AdminLog) instancia).verPedido(pedidos, String.valueOf(id));
+
+
 
                 } else {
 

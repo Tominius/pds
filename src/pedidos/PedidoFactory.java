@@ -49,7 +49,7 @@ public class PedidoFactory {
                 if (datos.length >= 3) {
                     String idPedido = datos[0].trim();
                     String idVehiculo = datos[1].trim();
-                    String idVendedor = datos[2].trim();
+                    String idVendedor = datos[3].trim();
                     PedidoDeCompra pedido = crearPedido(idPedido, idVehiculo, idVendedor);
                     pedidos.add(pedido);
                 }

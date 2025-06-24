@@ -60,7 +60,7 @@ public class UsersFactory {
             String linea;
             while ((linea = br.readLine()) != null) {
                 String[] campos = linea.split(",");
-                if (campos.length < 4) {
+                if (campos.length < 5) {
                     continue;
                 }
                 String tipo = campos[2].trim().toLowerCase();

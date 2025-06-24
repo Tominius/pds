@@ -29,7 +29,7 @@ public class Facturacion {
         System.out.printf("%-20s %s\n", "Dirección:", direccion);
         System.out.printf("%-20s %s\n", "CUIT/CUIL:", cuit_cuil);
         System.out.printf("%-20s %s\n", "Forma de Pago:", formaDePago.getMetodo());
-        System.out.printf("%-20s $s\n", "Costo Total:", costoTotal);
+        System.out.printf("%-20s %s\n", "Costo Total:", costoTotal);
         System.out.printf("%-20s %s\n", "Cliente:", cliente.getUsername());
 
     }

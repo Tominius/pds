@@ -52,10 +52,10 @@ public class FacturacionFactory {
 
         // Crear Facturacion con los datos de datosFacturacion y el cliente creado
         return new Facturacion(
-                datos[1], // costoTotal
-                datos[2], // formaDePago
+                datos[3], // costoTotal
+                datos[4], // formaDePago
                 formaDePago,
-                datos[3], // direccion
+                datos[0], // direccion
                 cliente
         );
     }

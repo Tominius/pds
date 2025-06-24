@@ -44,7 +44,11 @@ public class PedidoDeCompra {
          datosPedido.imprimirDatos();
          datosFacturacion.imprimirDatos();
          vehiculo.imprimirDatos();
-         vendedor.imprimirAtributos();
+         try {
+             vendedor.imprimirAtributos();
+         } catch (Exception e) {
+            System.out.println(CYAN + "Vendedor no asignado o no disponible." + RESET);
+         }
 
          System.out.println(AZUL + "======================================" + RESET);
      }

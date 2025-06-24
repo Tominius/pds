@@ -12,7 +12,10 @@ import vehiculos.DatosVehiculos;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
+
+import static menus.menuAdmin.esSiONo;
 
 public class AdminLog extends AbstractUserLog implements AdminLogI {
 
@@ -59,7 +62,7 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void verVehiculos(java.util.List<AbstractVehiculo> vehiculos) {//
+    public void verVehiculos(List<AbstractVehiculo> vehiculos) {//
         // Implementación del método para ver vehículos
         for (AbstractVehiculo vehiculo : vehiculos) {
             vehiculo.imprimirDatos();
@@ -68,7 +71,7 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void generarReporte(java.util.List<PedidoDeCompra> pedidos) {
+    public void generarReporte(List<PedidoDeCompra> pedidos) {
 
         final String ROJO = "\u001B[31m";
         final String VERDE = "\u001B[32m";
@@ -134,11 +137,26 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void verPedido(java.util.List<PedidoDeCompra> pedidos , String id) {
+    public void verPedido(List<PedidoDeCompra> pedidos , String id) {
         // Implementación del método para ver un pedido
         for (PedidoDeCompra pedido : pedidos) {
             if (pedido.getIdPedido().equals(id)) {
                 pedido.imprimirDatos();
+                System.out.print("¿Desea actualizar el estado del pedido? (Si/No): ");
+                Scanner scannerApp = new Scanner(System.in);
+                String actualizar = scannerApp.next();
+                if (esSiONo(actualizar) && actualizar.equalsIgnoreCase("si")) {
+                    System.out.print("Ingrese el nuevo estado: ");
+                    scannerApp.nextLine(); // Limpiar buffer
+                    String nuevoEstado = scannerApp.nextLine();
+                    for (PedidoDeCompra pedido1 : pedidos) {
+                        if (pedido.getIdPedido().equals(String.valueOf(id))) {
+                            pedido.actualizarEstadoPedido(nuevoEstado);
+                            System.out.println("Estado actualizado correctamente.");
+                            break;
+                        }
+                    }
+                }
                 return;
             }
         }
