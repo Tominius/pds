@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class DatosGeneral {
 
-    String ruta = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\pedidos.csv";
-    String rutaVehiculos = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\vehiculos\\vehiculos.csv";
+    String ruta = "src/pedidos/pedidos.csv";
+    String rutaVehiculos = "src/vehiculos/vehiculos.csv";
     Datos datosVendedor = new Datos();
 
 

@@ -7,8 +7,7 @@ import java.util.List;
 
 public class Datos {
 
-    String ruta = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\datosUsuarios\\datos.csv";
-
+    String ruta = "src/datosUsuarios/datos.csv";
 
     public String obtenerTipoUsuario(String username) {
         try {

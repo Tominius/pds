@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class DatosFacturacion {
 
-    String ruta = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\datosFacturacion\\datosFacturacion.csv";
+    String ruta = "src/pedidos/datosFacturacion/datosFacturacion.csv";
 
     public void cargarDatosFacturacion(String idPedido,String costoTotal, String formaDePago, String idCliente, String direccion, String cuilcuit) {
 
