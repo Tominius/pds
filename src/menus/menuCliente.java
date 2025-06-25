@@ -4,6 +4,7 @@ import datosUsuarios.Datos;
 import login.AbstractUserLog;
 import login.AdminLog;
 import login.ClienteLog;
+import pedidos.DatosGeneral;
 import pedidos.PedidoDeCompra;
 import pedidos.PedidoFactory;
 import vehiculos.AbstractVehiculo;
@@ -30,19 +31,21 @@ public class menuCliente {
     // Lista Vehículos
 
     VehiculoFactory vehiculoFactory = new VehiculoFactory();
-    String rutaCSV = "src/vehiculos/vehiculos.csv";
+    String rutaCSV = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\vehiculos\\vehiculos.csv";
     java.util.List<AbstractVehiculo> vehiculos = new java.util.ArrayList<>(vehiculoFactory.cargarVehiculosDesdeCSV(rutaCSV));
 
     // Lista Pedidos
 
     PedidoFactory pedidoFactory = new PedidoFactory();
-    String rutaCSVPedidos = "src/pedidos/pedidos.csv";
+    String rutaCSVPedidos = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\pedidos.csv";
     java.util.List<PedidoDeCompra> pedidos = new java.util.ArrayList<>(pedidoFactory.cargarPedidosDesdeCSV(rutaCSVPedidos));
 
     AbstractUserLog instancia;
+    String idCliente;
 
-    public menuCliente(ClienteLog instancia) {
+    public menuCliente(ClienteLog instancia, String idCliente) {
         this.instancia = instancia;
+        this.idCliente = idCliente;
     }
 
     // Menu Cliente
@@ -83,11 +86,17 @@ public class menuCliente {
 
                     // ID del pedido
                     int idPedido = -1;
+                    DatosGeneral datosGeneral = new DatosGeneral();
                     while (true) {
                         try {
                             System.out.print("ID del pedido: ");
                             idPedido = scannerApp.nextInt();
                             scannerApp.nextLine(); // Limpiar buffer
+
+                            if (datosGeneral.existePedido(String.valueOf(idPedido))) {
+                                System.out.println(ROJO + "⚠ El ID de pedido ya existe. Ingrese uno diferente." + RESET);
+                                continue;
+                            }
                             break;
                         } catch (Exception e) {
                             System.out.println(ROJO + "⚠ Ingrese un número entero válido." + RESET);
@@ -132,9 +141,16 @@ public class menuCliente {
                     System.out.println(AZUL + "\n=== Ingrese los datos de facturación ===" + RESET);
 
                     // Ver clientes y seleccionar uno
-                    ((ClienteLog) instancia).verClientes();
+                    ((ClienteLog) instancia).verClientes(((ClienteLog) instancia).getIdCliente());
                     System.out.print("ID Cliente: ");
                     String idCliente = scannerApp.nextLine();
+
+                    while (datosVendedor.usuarioExistePorIdYTipo(idCliente, "cliente") == false) {
+                        System.out.println(ROJO + "⚠ ID de cliente no válido. Por favor, ingrese un ID de cliente existente." + RESET);
+                        System.out.print("ID Cliente: ");
+                        idCliente = scannerApp.nextLine();
+                    }
+
 
                     System.out.print("Dirección: ");
                     String direccion = scannerApp.nextLine();
@@ -142,8 +158,18 @@ public class menuCliente {
                     System.out.print("CUIL/CUIT: ");
                     String cuilCuit = scannerApp.nextLine();
 
-                    System.out.print("Forma de Pago (Transferencia/Contado/Tarjeta): ");
-                    String formaPago = scannerApp.nextLine();
+                    String formaPago1 = "";
+                    while (true) {
+                        System.out.print("Forma de Pago (Transferencia/Contado/Tarjeta): ");
+                        formaPago1 = scannerApp.nextLine().trim().toLowerCase();
+                        if (formaPago1.equals("transferencia") || formaPago1.equals("contado") || formaPago1.equals("tarjeta")) {
+                            // Capitalizar la primera letra para mantener formato
+                            formaPago1 = formaPago1.substring(0, 1).toUpperCase() + formaPago1.substring(1);
+                            break;
+                        } else {
+                            System.out.println("Forma de pago no válida. Ingrese Transferencia, Contado o Tarjeta.");
+                        }
+                    }
 
                     System.out.println(AZUL + "\n=== Seleccione un vehículo ===" + RESET);
                     ((ClienteLog) instancia).verVehiculosDisponibles(vehiculos);
@@ -179,8 +205,16 @@ public class menuCliente {
                     // Seleccionar vendedor
                     System.out.println(AZUL + "\n=== Seleccione un vendedor ===" + RESET);
                     datosVendedor.imprimirTodosLosVendedores();
+
                     System.out.print("ID del vendedor: ");
                     String idVendedor = scannerApp.next();
+                    scannerApp.nextLine(); // Limpiar buffer
+
+                    while (datosVendedor.usuarioExistePorIdYTipo(idVendedor, "vendedor") == false) {
+                        System.out.println(ROJO + "⚠ ID de vendedor no válido. Por favor, ingrese un ID de vendedor existente." + RESET);
+                        System.out.print("ID Vendedor: ");
+                        idVendedor = scannerApp.nextLine();
+                    }
 
                     // Agregar el pedido
                     ((ClienteLog) instancia).agregarPedido(
@@ -193,7 +227,7 @@ public class menuCliente {
                             direccion,
                             cuilCuit,
                             String.valueOf(costoTotal),
-                            formaPago,
+                            formaPago1,
                             idVendedor
                     );
 

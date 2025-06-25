@@ -15,13 +15,13 @@ public class menuVendedor {
     // Lista Vehículos
 
     VehiculoFactory vehiculoFactory = new VehiculoFactory();
-    String rutaCSV = "src/vehiculos/vehiculos.csv";
+    String rutaCSV = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\vehiculos\\vehiculos.csv";
     java.util.List<AbstractVehiculo> vehiculos = new java.util.ArrayList<>(vehiculoFactory.cargarVehiculosDesdeCSV(rutaCSV));
 
     // Lista Pedidos
 
     PedidoFactory pedidoFactory = new PedidoFactory();
-    String rutaCSVPedidos = "src/pedidos/pedidos.csv";
+    String rutaCSVPedidos = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\pedidos.csv";
     java.util.List<PedidoDeCompra> pedidos = new java.util.ArrayList<>(pedidoFactory.cargarPedidosDesdeCSV(rutaCSVPedidos));
 
     AbstractUserLog instancia;

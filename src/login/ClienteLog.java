@@ -17,10 +17,12 @@ public class ClienteLog extends AbstractUserLog implements ClienteLogI {
     DatosFacturacion datosFacturacion = new DatosFacturacion();
     DatosGeneral datosGeneral = new DatosGeneral();
     DatosPedido datosPedidos = new DatosPedido();
+    String idCliente;
 
 
-    public ClienteLog(String usuario, String contrasena, String dni, String telefono, String email) {
+    public ClienteLog(String usuario, String contrasena, String dni, String telefono, String email, String idCliente) {
         super(usuario, contrasena);
+        this.idCliente = idCliente;
         this.dni = dni;
         this.telefono = telefono;
         this.email = email;
@@ -28,10 +30,14 @@ public class ClienteLog extends AbstractUserLog implements ClienteLogI {
 
     }
 
-    public void verClientes() {
+    public String getIdCliente() {
+        return idCliente;
+    }
+
+    public void verClientes(String idCliente) {
         // Implementación del método para ver clientes
 
-        datos.imprimirTodosLosClientes();
+        datos.imprimirClientePorId(idCliente);
     }
 
     public String getDni() {

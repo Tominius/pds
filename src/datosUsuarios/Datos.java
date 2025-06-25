@@ -7,7 +7,8 @@ import java.util.List;
 
 public class Datos {
 
-    String ruta = "src/datosUsuarios/datos.csv";
+    String ruta = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\datosUsuarios\\datos.csv";
+
 
     public String obtenerTipoUsuario(String username) {
         try {
@@ -29,43 +30,6 @@ public class Datos {
         }
         return null;
     }
-    public boolean vendedorExistePorId(String id) {
-        try {
-            java.nio.file.Path path = java.nio.file.Paths.get(ruta);
-            if (!java.nio.file.Files.exists(path)) {
-                return false;
-            }
-            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
-            for (String line : lines) {
-                String[] partes = line.split(",");
-                if (partes.length >= 5 && "vendedor".equals(partes[2]) && partes[4].equals(id)) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
-    
-    public boolean clienteExistePorId(String id) {
-        try {
-            java.nio.file.Path path = java.nio.file.Paths.get(ruta);
-            if (!java.nio.file.Files.exists(path)) {
-                return false;
-            }
-            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
-            for (String line : lines) {
-                String[] partes = line.split(",");
-                if (partes.length >= 7 && "cliente".equals(partes[2]) && partes[6].equals(id)) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
 
     public boolean usuarioExiste(String username) {
         try {
@@ -84,6 +48,25 @@ public class Datos {
         }
         return false;
     }
+    public boolean usuarioExistePorIdYTipo(String id, String tipoUsuario) {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(ruta);
+            if (!java.nio.file.Files.exists(path)) {
+                return false;
+            }
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
+            for (String line : lines) {
+                String[] partes = line.split(",");
+                if (partes.length >= 4 && partes[2].equals(tipoUsuario) && partes[partes.length - 1].equals(id)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+
 
     public boolean verificarUsuario(String username, String contraseña) {
         try {
@@ -105,12 +88,12 @@ public class Datos {
         return false;
     }
 
-    public void insertarCliente(String username, String contraseña, String dni, String telefono, String email) {
+    public void insertarCliente(String username, String contraseña, String dni, String telefono, String email, String idCliente) {
         if (usuarioExiste(username)) {
             System.out.println("El usuario ya existe.");
             return;
         }
-        String csvLine = username + "," + contraseña + ",cliente," + dni + "," + telefono + "," + email + "," + java.util.UUID.randomUUID().toString();
+        String csvLine = username + "," + contraseña + ",cliente," + dni + "," + telefono + "," + email + "," + idCliente;
         try {
             FileWriter fileWriter = new FileWriter(ruta, true);
             BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
@@ -210,7 +193,8 @@ public class Datos {
                     datosCliente.add(partes[1]); // contraseña
                     datosCliente.add(partes[3]); // dni
                     datosCliente.add(partes[4]); // telefono
-                    datosCliente.add(partes[5]); // email
+                    datosCliente.add(partes[5]);
+                    datosCliente.add(partes[6]);// email
                     return datosCliente;
                 }
             }
@@ -261,6 +245,31 @@ public class Datos {
                     System.out.println("Nombre: "+ cliente.get(0) + " | DNI: " + cliente.get(3) + " | Telefono: " + cliente.get(4) + " | Email: " + cliente.get(5) + " | ID: " + cliente.get(6));
                 }
                 System.out.println();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void imprimirClientePorId(String idCliente) {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(ruta);
+            if (!java.nio.file.Files.exists(path)) {
+                System.out.println("No hay clientes registrados.");
+                return;
+            }
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
+            List<List<String>> clientes = getLists(lines);
+            boolean encontrado = false;
+            for (java.util.List<String> cliente : clientes) {
+                if (cliente.size() >= 7 && cliente.get(6).equals(idCliente)) {
+                    System.out.println("Nombre: " + cliente.get(0) + " | DNI: " + cliente.get(3) + " | Telefono: " + cliente.get(4) + " | Email: " + cliente.get(5) + " | ID: " + cliente.get(6));
+                    encontrado = true;
+                    break;
+                }
+            }
+            if (!encontrado) {
+                System.out.println("No se encontró un cliente con el ID proporcionado.");
             }
         } catch (IOException e) {
             e.printStackTrace();

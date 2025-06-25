@@ -31,7 +31,7 @@ public class App {
             menu.mostrarMenu();
         } else if (instancia instanceof login.ClienteLog) {
             // Si la instancia es de tipo ClienteLog, mostrar el menú de cliente
-            menuCliente menu = new menuCliente((login.ClienteLog) instancia);
+            menuCliente menu = new menuCliente((login.ClienteLog) instancia, ((ClienteLog) instancia).getIdCliente());
             menu.mostrarMenu();
         } else if (instancia instanceof VendedorLog) {
             // Si la instancia es de tipo VendedorLog, mostrar el menú de vendedor

@@ -10,8 +10,8 @@ import java.util.List;
 
 public class FacturacionFactory {
 
-    String ruta = "src/pedidos/datosFacturacion/datosFacturacion.csv";
-    String rutaClientes = "src/datosUsuarios/datos.csv";
+    String ruta = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\datosFacturacion\\datosFacturacion.csv";
+    String rutaClientes = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\datosUsuarios\\datos.csv";
 
     public Facturacion crearFacturacionPorPedido(String idPedido) {
         List<String[]> datosFacturacion = leerCSV(ruta);
@@ -36,7 +36,8 @@ public class FacturacionFactory {
                 datosCliente[1],
                 datosCliente[4],
                 datosCliente[3],
-                datosCliente[5]
+                datosCliente[5],
+                datosCliente[6]
         );
 
         FormaDePago formaDePago;

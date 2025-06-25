@@ -9,8 +9,8 @@ import java.util.List;
 public class DPedidoFactory {
 
     public DPedido crearDPedidoPorId(String idPedido) {
-        List<String[]> datosPedidos = leerCSV("src/pedidos/datosPedidos/datosPedido.csv");
-        List<String[]> datosHistorial = leerCSV("src/pedidos/datosPedidos/historiale.csv");
+        List<String[]> datosPedidos = leerCSV("C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\datosPedidos\\datosPedido.csv");
+        List<String[]> datosHistorial = leerCSV("C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\datosPedidos\\historiale.csv");
 
         // Buscar el pedido por idPedido
         String[] datos = datosPedidos.stream()

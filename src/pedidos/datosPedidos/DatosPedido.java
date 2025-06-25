@@ -5,7 +5,7 @@ import java.io.IOException;
 
 public class DatosPedido {
 
-    String ruta = "src/pedidos/datosPedidos/datosPedido.csv";
+    String ruta = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\datosPedidos\\datosPedido.csv";
 
 
     public void cargarDatosPedidos(int pedido, String fecha, String nombreConsecionaria, String cuitConsecionaria) {
@@ -20,7 +20,7 @@ public class DatosPedido {
     }
 
     private void insertarEnHistorial(String id, String area) {
-        String rutaHistorial = "src/pedidos/datosPedidos/historiale.csv";
+        String rutaHistorial = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\datosPedidos\\historiale.csv";
         try (FileWriter fw = new FileWriter(rutaHistorial, true)) {
             fw.write(id + "," + area + "\n");
         } catch (IOException e) {

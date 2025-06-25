@@ -28,8 +28,8 @@ public class PedidoFactory {
 
         Facturacion factura = facturacionFactory.crearFacturacionPorPedido(idPedido);
         DPedido datosPedido = dPedidoFactory.crearDPedidoPorId(idPedido);
-        VendedorLog vendedor = usersFactory.devuelveVendedorLog("src/datosUsuarios/datos.csv", idVendedor);
-        AbstractVehiculo vehiculo = VehiculoFactory.cargarVehiculoPorIdDesdeCSV("src/vehiculos/vehiculos.csv", idVehiculo);
+        VendedorLog vendedor = usersFactory.devuelveVendedorLog("C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\datosUsuarios\\datos.csv", idVendedor);
+        AbstractVehiculo vehiculo = VehiculoFactory.cargarVehiculoPorIdDesdeCSV("C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\vehiculos\\vehiculos.csv", idVehiculo);
 
         return new PedidoDeCompra(
                 idPedido,
