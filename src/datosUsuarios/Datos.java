@@ -29,6 +29,43 @@ public class Datos {
         }
         return null;
     }
+    public boolean vendedorExistePorId(String id) {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(ruta);
+            if (!java.nio.file.Files.exists(path)) {
+                return false;
+            }
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
+            for (String line : lines) {
+                String[] partes = line.split(",");
+                if (partes.length >= 5 && "vendedor".equals(partes[2]) && partes[4].equals(id)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+    public boolean clienteExistePorId(String id) {
+        try {
+            java.nio.file.Path path = java.nio.file.Paths.get(ruta);
+            if (!java.nio.file.Files.exists(path)) {
+                return false;
+            }
+            java.util.List<String> lines = java.nio.file.Files.readAllLines(path);
+            for (String line : lines) {
+                String[] partes = line.split(",");
+                if (partes.length >= 7 && "cliente".equals(partes[2]) && partes[6].equals(id)) {
+                    return true;
+                }
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 
     public boolean usuarioExiste(String username) {
         try {
