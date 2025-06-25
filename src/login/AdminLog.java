@@ -11,7 +11,6 @@ import vehiculos.DatosVehiculos;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
@@ -39,9 +38,9 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
     }
 
     @Override
-    public void agregarCliente(String username, String contraseña, String dni, String telefono, String email, String idCliente) {//
+    public void agregarCliente(String username, String contraseña, String dni, String telefono, String email) {//
         // Implementación del método para agregar un cliente
-        datos.insertarCliente(username, contraseña, dni, telefono, email, idCliente);
+        datos.insertarCliente(username, contraseña, dni, telefono, email);
     }
 
     @Override
@@ -79,7 +78,7 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
         final String RESET = "\u001B[0m";
         Scanner scanner = new Scanner(System.in);
 
-        Date fechaFiltro = null;
+        String fechaFiltro = null;
         String estadoFiltro = null;
 
         // Validar fecha
@@ -95,7 +94,7 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
                 SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
                 sdf.setLenient(false); // No permite fechas inválidas como 32/01/2024
                 Date fecha = sdf.parse(inputFecha);
-                fechaFiltro = fecha;
+                fechaFiltro = inputFecha;
                 break;
             } catch (ParseException e) {
                 System.out.println(ROJO + "⚠ Fecha inválida. Asegúrese de usar el formato dd/mm/yyyy." + RESET);
@@ -114,24 +113,18 @@ public class AdminLog extends AbstractUserLog implements AdminLogI {
         System.out.println("Fecha: " + (fechaFiltro != null ? fechaFiltro : "Sin filtrar"));
         System.out.println("Estado: " + (estadoFiltro != null ? estadoFiltro : "Sin filtrar"));
 
-
         Reporte reporte = new Reporte(pedidos, fechaFiltro, estadoFiltro);
         // Aquí puedes pasar el método de pago si es necesario
 
 
         System.out.println("Reporte de Pedidos de Compra:");
-        List<PedidoDeCompra> pedidosFiltrados = new ArrayList<>();
         for (PedidoDeCompra pedido : pedidos) {
-
             boolean coincideFecha = (fechaFiltro == null || pedido.getFecha().equals(fechaFiltro));
             boolean coincideEstado = (estadoFiltro == null || pedido.getEstado().equalsIgnoreCase(estadoFiltro));
             if (coincideFecha && coincideEstado) {
                 pedido.imprimirDatos();
-                pedidosFiltrados.add(pedido);
+                reporte.agregarPedido(pedido);
             }
-        }
-        for (PedidoDeCompra pedido : pedidosFiltrados) {
-            reporte.agregarPedido(pedido);
         }
 
     }

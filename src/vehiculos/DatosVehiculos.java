@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class DatosVehiculos {
 
-    String ruta = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\datosPedidos\\historiale.csv";
+    String ruta = "src/vehiculos/vehiculos.csv";
 
     /*public void verVehiculos() {
         try {

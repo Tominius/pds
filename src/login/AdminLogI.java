@@ -6,7 +6,7 @@ import vehiculos.AbstractVehiculo;
 public interface AdminLogI {
 
     void verClientes();
-    void agregarCliente(String username, String contraseña, String dni, String telefono, String email, String idCliente);
+    void agregarCliente(String username, String contraseña, String dni, String telefono, String email);
     void eliminarCliente(String username);
     void cargarVehiculo(String tipo, String marca, String modelo, String color, String equipAdicional, String chasis, String motor, String caracteristicas, String disponible, String atributoEspecifico, String id, double precioVehiculo, String aplicaImpuestoNacional, String aplicaImpuestoProvincial);
     void eliminarVehiculo(String id);

@@ -21,7 +21,7 @@ public class UsersFactory {
                         usuarios.add(new AdminLog(campos[0], campos[1]));
                         break;
                     case "cliente":
-                        usuarios.add(new ClienteLog(campos[0], campos[1], campos[3], campos[4], campos[5],campos[6]));
+                        usuarios.add(new ClienteLog(campos[0], campos[1], campos[3], campos[4], campos[5]));
                         break;
                     case "vendedor":
                         usuarios.add(new VendedorLog(campos[0], campos[1], campos[3]));
@@ -46,7 +46,7 @@ public class UsersFactory {
                 }
                 String tipo = campos[2].trim().toLowerCase();
                 if ("cliente".equals(tipo) && campos[6].equals(idCliente)) {
-                    return new ClienteLog(campos[0], campos[1], campos[3], campos[4], campos[5], campos[6]);
+                    return new ClienteLog(campos[0], campos[1], campos[3], campos[4], campos[5]);
                 }
             }
         } catch (IOException e) {
@@ -74,8 +74,8 @@ public class UsersFactory {
         return null;
     }
 
-    public ClienteLog devuelveClienteLog(String username, String contraseña, String dni, String telefono, String email, String idCliente) {
-        return new ClienteLog(username, contraseña, dni, telefono, email, idCliente); // Asumiendo que el ID del cliente es el mismo que el username
+    public ClienteLog devuelveClienteLog(String username, String contraseña, String dni, String telefono, String email) {
+        return new ClienteLog(username, contraseña, dni, telefono, email);
     }
 
 

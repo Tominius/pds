@@ -52,7 +52,7 @@ public class Login {
             return new AdminLog(username, password);
         } else if (tipoUsuario.equals("cliente")) {
             // Crear instancia de la clase ClienteLog
-            return new ClienteLog(username, password, datos.obtenerDatosParaClienteLog(username).get(2), datos.obtenerDatosParaClienteLog(username).get(3), datos.obtenerDatosParaClienteLog(username).get(4), datos.obtenerDatosParaClienteLog(username).get(5));
+            return new ClienteLog(username, password, datos.obtenerDatosParaClienteLog(username).get(2), datos.obtenerDatosParaClienteLog(username).get(3), datos.obtenerDatosParaClienteLog(username).get(4));
         } else if (tipoUsuario.equals("vendedor")) {
             // Crear instancia de la clase VendedorLog
             return new VendedorLog(username, password, datos.obtenerDatosParaVendedorLog(username).get(2));

@@ -7,8 +7,8 @@ import java.io.IOException;
 
 public class DatosGeneral {
 
-    String ruta = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\pedidos\\pedidos.csv";
-    String rutaVehiculos = "C:\\Users\\54116\\Documents\\Facultad\\PDS\\TPO\\VersionFinal\\pds\\src\\vehiculos\\vehiculos.csv";
+    String ruta = "src/pedidos/pedidos.csv";
+    String rutaVehiculos = "src/vehiculos/vehiculos.csv";
     Datos datosVendedor = new Datos();
 
 
@@ -21,18 +21,7 @@ public class DatosGeneral {
         }
     }
 
-    public boolean existePedido(String idPedido) {
-        try (java.io.BufferedReader br = new java.io.BufferedReader(new java.io.FileReader(ruta))) {
-            String linea;
-            while ((linea = br.readLine()) != null) {
-                String[] partes = linea.split(",");
-                if (partes.length > 0 && partes[0].equals(idPedido)) {
-                    return true;
-                }
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return false;
+    public void verDatosGeneral() {
+
     }
 }
